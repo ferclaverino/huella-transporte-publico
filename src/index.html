@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Huella Carbono de Transporte Público</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./app.ts"></script>
+  </head>
+  <body>
+    <div id="route-panel">
+      <b>Desde: </b>
+      <select id="start">
+        <option value="-34.5998703,-58.4002371">
+          Facultad de Ciencias Económicas
+        </option>
+        <option value="-34.6175841,-58.3708035">Facultad de Ingenieria</option>
+        <option value="-34.6196783,-58.4437519">Facultad de Psicología</option>
+      </select>
+      <b>Hasta: </b>
+      <select id="end">
+        <option value="-34.5998703,-58.4002371">
+          Facultad de Ciencias Económicas
+        </option>
+        <option value="-34.6175841,-58.3708035">Facultad de Ingenieria</option>
+        <option value="-34.6196783,-58.4437519">Facultad de Psicología</option>
+      </select>
+    </div>
+    <div id="car">
+      <div>Distancia en auto: <span id="car-distance">...</span> km</div>
+      <div>
+        Huella C02:
+        <span id="car-emissions">...</span> gr
+      </div>
+    </div>
+    <div id="bus">
+      <div>Distancia en colectivo: <span id="bus-distance">...</span> km</div>
+      <div>Huella C02: <span id="bus-emissions">...</span> gr</div>
+    </div>
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh7YNxa6tsMc7KBQuyv1_yDmYRae0KV6Y&loading=async&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>
