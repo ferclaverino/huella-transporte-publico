@@ -29,7 +29,8 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         # location of the coverage artifacts
-        path: "./dist"
+        name: build
+        path: dist
     
   publish:
     runs-on: ubuntu-latest
