@@ -6,6 +6,7 @@ export class MainPage {
   private readonly map = new google.maps.Map(document.getElementById("map")!, {
     zoom: 17,
     center: { lat: -34.5998703, lng: -58.4002371 },
+    draggable: false,
   });
   private readonly carDirectionsRenderer = new google.maps.DirectionsRenderer({
     polylineOptions: {
