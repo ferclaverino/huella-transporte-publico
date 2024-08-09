@@ -30,32 +30,16 @@
             <div class="card-body">
               <form>
                 <div class="mb-3">
-                  <label for="start" class="form-label">Desde:</label>
-                  <select id="start" class="form-select">
-                    <option value="-34.5998703,-58.4002371">
-                      Facultad de Ciencias Económicas
-                    </option>
-                    <option value="-34.6175841,-58.3708035">
-                      Facultad de Ingenieria
-                    </option>
-                    <option value="-34.6196783,-58.4437519">
-                      Facultad de Psicología
-                    </option>
-                  </select>
+                  <label for="origin" class="form-label">Desde:</label>
+                  <input id="origin" class="form-control" placeholder="Desde" />
                 </div>
                 <div class="mb-3">
-                  <label for="start" class="form-label">Hasta:</label>
-                  <select id="end" class="form-select">
-                    <option value="-34.5998703,-58.4002371">
-                      Facultad de Ciencias Económicas
-                    </option>
-                    <option value="-34.6175841,-58.3708035">
-                      Facultad de Ingenieria
-                    </option>
-                    <option value="-34.6196783,-58.4437519">
-                      Facultad de Psicología
-                    </option>
-                  </select>
+                  <label for="destination" class="form-label">Hasta:</label>
+                  <input
+                    id="destination"
+                    class="form-control"
+                    placeholder="Hasta"
+                  />
                 </div>
               </form>
             </div>
@@ -94,7 +78,7 @@
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh7YNxa6tsMc7KBQuyv1_yDmYRae0KV6Y&loading=async&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh7YNxa6tsMc7KBQuyv1_yDmYRae0KV6Y&loading=async&region=AR&language=es&libraries=places&callback=initMap"
       defer
     ></script>
     <script type="module" src="./app.ts"></script>

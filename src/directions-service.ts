@@ -6,19 +6,19 @@ export class DirectionsService {
   }
 
   routeForCar(
-    start: string,
-    end: string
+    originPlaceId: string,
+    destinationPlaceId: string
   ): Promise<google.maps.DirectionsResult> {
-    return this.route(start, end, {
+    return this.route(originPlaceId, destinationPlaceId, {
       travelMode: google.maps.TravelMode.DRIVING,
     });
   }
 
   routeForBus(
-    start: string,
-    end: string
+    originPlaceId: string,
+    destinationPlaceId: string
   ): Promise<google.maps.DirectionsResult> {
-    return this.route(start, end, {
+    return this.route(originPlaceId, destinationPlaceId, {
       travelMode: google.maps.TravelMode.TRANSIT,
       transitOptions: { modes: [google.maps.TransitMode.BUS] },
       // transitOptions: { modes: [google.maps.TransitMode.SUBWAY] },
@@ -27,16 +27,16 @@ export class DirectionsService {
   }
 
   private route(
-    start: string,
-    end: string,
+    originPlaceId: string,
+    destinationPlaceId: string,
     travelModeAndOptions
   ): Promise<google.maps.DirectionsResult> {
     const request = {
       origin: {
-        query: start,
+        placeId: originPlaceId,
       },
       destination: {
-        query: end,
+        placeId: destinationPlaceId,
       },
       ...travelModeAndOptions,
     };
