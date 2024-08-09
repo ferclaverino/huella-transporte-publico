@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { FootprintService } from "../src/footprint-service";
+
 import { routeForCarWith1Step, routeForCarWith2Steps } from "./route-for-car";
 import {
   routeForBusWith1Step,
@@ -8,7 +8,8 @@ import {
 import {
   emissionFactorByTransport,
   TransportType,
-} from "../src/footprint-model";
+} from "../src/model/emission-factor";
+import { FootprintService } from "../src/services/footprint-service";
 
 describe("FootprintService", () => {
   test("given route for car with 1 step, then calculate distance", () => {
