@@ -1,8 +1,8 @@
-import { DirectionsService } from "./directions-service";
+import { DirectionsService } from "./services/directions-service";
 import { MainPage } from "./main-page";
-import { FootprintService } from "./footprint-service";
-import { MapComponent } from "./map-component";
-import { SearchComponent } from "./search-component";
+import { FootprintService } from "./services/footprint-service";
+import { MapComponent } from "./components/map-component";
+import { SearchComponent } from "./components/search-component";
 
 function initMap() {
   const directionsService = new DirectionsService();

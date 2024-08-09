@@ -1,4 +1,4 @@
-import { Footprint } from "./footprint-service";
+import { Footprint } from "./footprint";
 
 export class FootprintViewModel {
   readonly distanceInKm: string;

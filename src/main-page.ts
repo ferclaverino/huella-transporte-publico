@@ -1,8 +1,9 @@
-import { DirectionsService } from "./directions-service";
-import { Footprint, FootprintService } from "./footprint-service";
-import { FootprintViewModel } from "./footprint-view-model";
-import { MapComponent } from "./map-component";
-import { SearchComponent } from "./search-component";
+import { DirectionsService } from "./services/directions-service";
+import { FootprintService } from "./services/footprint-service";
+import { MapComponent } from "./components/map-component";
+import { SearchComponent } from "./components/search-component";
+import { Footprint } from "./model/footprint";
+import { FootprintViewModel } from "./model/footprint-view-model";
 
 export class MainPage {
   private originPlaceId: string;
