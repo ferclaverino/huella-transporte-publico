@@ -44,14 +44,6 @@ export class MainPage {
       strokeOpacity: 0.8,
     },
   });
-
-  private readonly originElement = document.getElementById(
-    "origin"
-  )! as HTMLInputElement;
-  private readonly destinationElement = document.getElementById(
-    "destination"
-  )! as HTMLInputElement;
-
   private originPlaceId: string;
   private destinationPlaceId: string;
 
@@ -64,35 +56,36 @@ export class MainPage {
   }
 
   init() {
-    this.initOriginAutocomplete();
-    this.initDestinationAutocomplete();
+    this.initAutocomplete("origin", (autocomplete) =>
+      this.setOriginPlace(autocomplete.getPlace())
+    );
+    this.initAutocomplete("destination", (autocomplete) =>
+      this.setDestinationPlace(autocomplete.getPlace())
+    );
   }
 
-  initOriginAutocomplete() {
+  initAutocomplete(
+    inputId: string,
+    autocompleteCallback: (
+      autocomplete: google.maps.places.Autocomplete
+    ) => void
+  ) {
     // How to use place autocomplete:
     // https://developers.google.com/maps/documentation/javascript/place-autocomplete
-
+    const inputElement = document.getElementById(inputId)! as HTMLInputElement;
     const autocomplete = new google.maps.places.Autocomplete(
-      this.originElement,
+      inputElement,
       autocompleteOptions
     );
-
-    autocomplete.addListener("place_changed", () => {
-      this.setOriginPlace(autocomplete.getPlace());
-    });
-  }
-
-  initDestinationAutocomplete() {
-    // How to use place autocomplete:
-    // https://developers.google.com/maps/documentation/javascript/place-autocomplete
-
-    const autocomplete = new google.maps.places.Autocomplete(
-      this.destinationElement,
-      autocompleteOptions
+    autocomplete.addListener("place_changed", () =>
+      autocompleteCallback(autocomplete)
     );
 
-    autocomplete.addListener("place_changed", () => {
-      this.setDestinationPlace(autocomplete.getPlace());
+    const clearButtonElement = document.getElementById(
+      `${inputId}-clear`
+    )! as HTMLElement;
+    clearButtonElement.addEventListener("click", () => {
+      inputElement.value = "";
     });
   }
 
