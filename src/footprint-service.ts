@@ -1,18 +1,10 @@
+import { emissionFactorByTransport, TransportType } from "./footprint-model";
+
 // because can´t use google.maps.TravelMode on jest
 const enum GoogleTravelMode {
   DRIVING = "DRIVING",
   TRANSIT = "TRANSIT",
 }
-
-export const enum TransportType {
-  CAR = "car",
-  BUS = "bus",
-}
-
-export const emissionFactorByTransport: Record<TransportType, number> = {
-  car: 10,
-  bus: 100,
-};
 
 export interface Footprint {
   distance: number;
