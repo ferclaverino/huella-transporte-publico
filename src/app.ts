@@ -3,6 +3,7 @@ import { MainPage } from "./main-page";
 import { FootprintService } from "./services/footprint-service";
 import { MapComponent } from "./components/map-component";
 import { SearchComponent } from "./components/search-component";
+import { FootPrintComponent } from "./components/footprint-component";
 
 function initMap() {
   const directionsService = new DirectionsService();
@@ -10,12 +11,13 @@ function initMap() {
 
   const mapComponent = new MapComponent("map");
   const searchComponent = new SearchComponent("origin", "destination");
-
+  const footPrintComponent = new FootPrintComponent("car", "bus");
   const mainPageObject = new MainPage(
     directionsService,
     footprintService,
     mapComponent,
-    searchComponent
+    searchComponent,
+    footPrintComponent
   );
 }
 

@@ -2,8 +2,7 @@ import { DirectionsService } from "./services/directions-service";
 import { FootprintService } from "./services/footprint-service";
 import { MapComponent } from "./components/map-component";
 import { SearchComponent } from "./components/search-component";
-import { Footprint } from "./model/footprint";
-import { FootprintViewModel } from "./model/footprint-view-model";
+import { FootPrintComponent } from "./components/footprint-component";
 
 export class MainPage {
   private originPlaceId: string;
@@ -13,7 +12,8 @@ export class MainPage {
     private directionsService: DirectionsService,
     private footprintService: FootprintService,
     private mapComponent: MapComponent,
-    searchComponent: SearchComponent
+    searchComponent: SearchComponent,
+    private footPrintComponent: FootPrintComponent
   ) {
     searchComponent.onOriginChange((placeId) => this.setOriginPlaceId(placeId));
     searchComponent.onDestinationChange((placeId) =>
@@ -36,35 +36,21 @@ export class MainPage {
     if (!this.destinationPlaceId) return;
 
     this.directionsService
-      .routeForCar(this.originPlaceId, this.destinationPlaceId)
+      .getRouteForCar(this.originPlaceId, this.destinationPlaceId)
       .then((directionsResult) => {
-        this.mapComponent.displayRouteForCar(directionsResult);
-        this.displayFootprint(
-          this.footprintService.getFootprint(directionsResult),
-          "car"
+        this.mapComponent.displayForCar(directionsResult);
+        this.footPrintComponent.displayForCar(
+          this.footprintService.getFootprint(directionsResult)
         );
       });
 
     this.directionsService
-      .routeForBus(this.originPlaceId, this.destinationPlaceId)
+      .getRouteForBus(this.originPlaceId, this.destinationPlaceId)
       .then((directionsResult) => {
-        this.mapComponent.displayRouteForBus(directionsResult);
-        this.displayFootprint(
-          this.footprintService.getFootprint(directionsResult),
-          "bus"
+        this.mapComponent.displayForBus(directionsResult);
+        this.footPrintComponent.displayForBus(
+          this.footprintService.getFootprint(directionsResult)
         );
       });
-  }
-
-  private displayFootprint(footprint: Footprint, elementPrefix: string) {
-    const footprintViewModel = new FootprintViewModel(footprint);
-    const distanceElement = document.getElementById(
-      `${elementPrefix}-distance`
-    )!;
-    const emisionsElement = document.getElementById(
-      `${elementPrefix}-emissions`
-    )!;
-    distanceElement.innerHTML = footprintViewModel.distanceInKm;
-    emisionsElement.innerHTML = footprintViewModel.emissionsInGr;
   }
 }

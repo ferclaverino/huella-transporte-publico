@@ -5,7 +5,7 @@ export class DirectionsService {
     this.directionsService = new google.maps.DirectionsService();
   }
 
-  routeForCar(
+  getRouteForCar(
     originPlaceId: string,
     destinationPlaceId: string
   ): Promise<google.maps.DirectionsResult> {
@@ -14,7 +14,7 @@ export class DirectionsService {
     });
   }
 
-  routeForBus(
+  getRouteForBus(
     originPlaceId: string,
     destinationPlaceId: string
   ): Promise<google.maps.DirectionsResult> {

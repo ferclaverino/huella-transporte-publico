@@ -32,11 +32,11 @@ export class MapComponent {
     this.busDirectionsRenderer.setMap(this.map);
   }
 
-  displayRouteForCar(route: google.maps.DirectionsResult) {
+  displayForCar(route: google.maps.DirectionsResult) {
     this.carDirectionsRenderer.setDirections(route);
   }
 
-  displayRouteForBus(route: google.maps.DirectionsResult) {
+  displayForBus(route: google.maps.DirectionsResult) {
     this.busDirectionsRenderer.setDirections(route);
   }
 }
