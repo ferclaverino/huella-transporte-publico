@@ -36,8 +36,9 @@ export class DirectionsService {
   getRouteForTransportMode(
     originPlaceId: string,
     destinationPlaceId: string,
-    transportMode: TransportMode
-  ): Promise<google.maps.DirectionsResult> {
+    transportMode: TransportMode,
+    callback: (result: google.maps.DirectionsResult | null) => void
+  ) {
     const travelModeAndTransitMode =
       this.travelModeAndTransitModeByTransportMode[transportMode];
 
@@ -57,10 +58,10 @@ export class DirectionsService {
       };
     }
 
-    return this.directionsService
-      .route(request)
-      .catch((e) =>
-        console.error("Can´t get route", e)
-      ) as Promise<google.maps.DirectionsResult>; // TODO: use null object;
+    this.directionsService.route(request, (result, status) => {
+      if (status == "OK") {
+        callback(result);
+      }
+    });
   }
 }
