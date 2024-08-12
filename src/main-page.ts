@@ -39,18 +39,16 @@ export class MainPage {
     [
       TransportMode.CAR,
       TransportMode.BUS,
-      // TransportMode.SUBWAY,
-      // TransportMode.TRAIN,
-      // TransportMode.BIKE,
-      // TransportMode.WALK,
+      TransportMode.SUBWAY,
+      TransportMode.TRAIN,
+      TransportMode.BIKE,
+      TransportMode.WALK,
     ].forEach((transportMode: TransportMode) => {
-      this.directionsService
-        .getRouteForTransportMode(
-          this.originPlaceId,
-          this.destinationPlaceId,
-          transportMode
-        )
-        .then((directionsResult) => {
+      this.directionsService.getRouteForTransportMode(
+        this.originPlaceId,
+        this.destinationPlaceId,
+        transportMode,
+        (directionsResult) => {
           this.mapComponent.displayForTransportMode(
             directionsResult,
             transportMode
@@ -59,7 +57,8 @@ export class MainPage {
             this.footprintService.getFootprint(directionsResult),
             transportMode
           );
-        });
+        }
+      );
     });
   }
 }
