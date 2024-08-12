@@ -37,10 +37,12 @@ export class MainPage {
     if (!this.destinationPlaceId) return;
 
     [
-      // TransportMode.CAR,
-      // TransportMode.BUS,
-      TransportMode.SUBWAY,
-      TransportMode.TRAIN,
+      TransportMode.CAR,
+      TransportMode.BUS,
+      // TransportMode.SUBWAY,
+      // TransportMode.TRAIN,
+      // TransportMode.BIKE,
+      // TransportMode.WALK,
     ].forEach((transportMode: TransportMode) => {
       this.directionsService
         .getRouteForTransportMode(
@@ -53,9 +55,10 @@ export class MainPage {
             directionsResult,
             transportMode
           );
-          // this.footPrintComponent.displayForCar(
-          //   this.footprintService.getFootprint(directionsResult)
-          // );
+          this.footPrintComponent.displayForTransportMode(
+            this.footprintService.getFootprint(directionsResult),
+            transportMode
+          );
         });
     });
   }

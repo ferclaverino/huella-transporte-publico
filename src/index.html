@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Huella Carbono de Transporte Público</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
@@ -26,7 +27,7 @@
         </div>
       </nav>
       <div class="row h-100">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
           <div class="card mb-3">
             <div class="card-body">
               <form>
@@ -62,25 +63,39 @@
 
           <div class="card mb-3">
             <div class="card-body">
-              <div id="car">
-                <div>
-                  Distancia en auto: <span id="car-distance">...</span> km
-                </div>
-                <div>
-                  Huella C02:
-                  <span id="car-emissions">...</span> gr
-                </div>
-              </div>
-              <div id="bus">
-                <div>
-                  Distancia en colectivo: <span id="bus-distance">...</span> km
-                </div>
-                <div>Huella C02: <span id="bus-emissions">...</span> gr</div>
+              <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">Medio de transporte</th>
+                      <th scope="col">Distancia (km)</th>
+                      <th scope="col">Tiempo</th>
+                      <th scope="col">Emisión (gr CO2)</th>
+                      <th scope="col">Arbolitos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Auto</th>
+                      <td><span id="CAR-distance"></span></td>
+                      <td></td>
+                      <td><span id="CAR-emissions"></span></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Colectivo</th>
+                      <td><span id="BUS-distance"></span></td>
+                      <td></td>
+                      <td><span id="BUS-emissions"></span></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-sm-9 h-100">
+        <div class="col-sm-6 h-100">
           <div class="card h-100">
             <div id="map" class="h-100"></div>
           </div>

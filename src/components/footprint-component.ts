@@ -1,27 +1,23 @@
 import { Footprint } from "../model/footprint";
 import { FootprintViewModel } from "../model/footprint-view-model";
+import { TransportMode } from "../model/transport-mode";
 
 export class FootPrintComponent {
-  constructor(
-    private carElementPrefix: string,
-    private busElementPrefix: string
-  ) {}
+  // displayForCar(footprint: Footprint) {
+  //   this.displayFootprint(this.carElementPrefix, footprint);
+  // }
 
-  displayForCar(footprint: Footprint) {
-    this.displayFootprint(this.carElementPrefix, footprint);
-  }
+  // displayForBus(footprint: Footprint) {
+  //   this.displayFootprint(this.busElementPrefix, footprint);
+  // }
 
-  displayForBus(footprint: Footprint) {
-    this.displayFootprint(this.busElementPrefix, footprint);
-  }
-
-  private displayFootprint(elementPrefix: string, footprint: Footprint) {
+  displayForTransportMode(footprint: Footprint, transportMode: TransportMode) {
     const footprintViewModel = new FootprintViewModel(footprint);
     const distanceElement = document.getElementById(
-      `${elementPrefix}-distance`
+      `${transportMode}-distance`
     )!;
     const emisionsElement = document.getElementById(
-      `${elementPrefix}-emissions`
+      `${transportMode}-emissions`
     )!;
     distanceElement.innerHTML = footprintViewModel.distanceInKm;
     emisionsElement.innerHTML = footprintViewModel.emissionsInGr;

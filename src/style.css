@@ -2,30 +2,3 @@
   background-color: #ff963e;
   color: #ffffff;
 }
-
-#car {
-  background-color: #73b9ff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: "Roboto", "sans-serif";
-}
-
-#car div {
-  background-color: #fff;
-  padding: 5px;
-}
-
-#bus {
-  z-index: 5;
-  background-color: #5cb85c;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: "Roboto", "sans-serif";
-}
-
-#bus div {
-  background-color: #fff;
-  padding: 5px;
-}
