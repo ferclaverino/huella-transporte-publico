@@ -6,10 +6,18 @@ import {
   routeForBusWithWalkingStep,
 } from "./route-for-bus";
 import { emissionFactorByTransport } from "../src/model/emission-factor";
-import { FootprintService } from "../src/services/footprint-service";
+import {
+  emptyFootprint,
+  FootprintService,
+} from "../src/services/footprint-service";
 import { TransportMode } from "../src/model/transport-mode";
 
 describe("FootprintService", () => {
+  test("given empty route, then calculate distance", () => {
+    const footprintService = new FootprintService();
+    expect(footprintService.getFootprint(null)).toEqual(emptyFootprint);
+  });
+
   test("given route for car with 1 step, then calculate distance", () => {
     const footprintService = new FootprintService();
     expect(
