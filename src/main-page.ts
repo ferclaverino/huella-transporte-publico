@@ -36,30 +36,27 @@ export class MainPage {
     if (!this.originPlaceId) return;
     if (!this.destinationPlaceId) return;
 
-    this.directionsService
-      .getRouteForTransportMode(
-        this.originPlaceId,
-        this.destinationPlaceId,
-        TransportMode.CAR
-      )
-      .then((directionsResult) => {
-        this.mapComponent.displayForCar(directionsResult);
-        this.footPrintComponent.displayForCar(
-          this.footprintService.getFootprint(directionsResult)
-        );
-      });
-
-    this.directionsService
-      .getRouteForTransportMode(
-        this.originPlaceId,
-        this.destinationPlaceId,
-        TransportMode.BUS
-      )
-      .then((directionsResult) => {
-        this.mapComponent.displayForBus(directionsResult);
-        this.footPrintComponent.displayForBus(
-          this.footprintService.getFootprint(directionsResult)
-        );
-      });
+    [
+      // TransportMode.CAR,
+      // TransportMode.BUS,
+      TransportMode.SUBWAY,
+      TransportMode.TRAIN,
+    ].forEach((transportMode: TransportMode) => {
+      this.directionsService
+        .getRouteForTransportMode(
+          this.originPlaceId,
+          this.destinationPlaceId,
+          transportMode
+        )
+        .then((directionsResult) => {
+          this.mapComponent.displayForTransportMode(
+            directionsResult,
+            transportMode
+          );
+          // this.footPrintComponent.displayForCar(
+          //   this.footprintService.getFootprint(directionsResult)
+          // );
+        });
+    });
   }
 }
