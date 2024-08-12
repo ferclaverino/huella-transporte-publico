@@ -2,3 +2,27 @@
   background-color: #ff963e;
   color: #ffffff;
 }
+
+.bg-CAR {
+  background-color: #e11e26;
+}
+
+.bg-BUS {
+  background-color: #193662;
+}
+
+.bg-SUBWAY {
+  background-color: #f1882c;
+}
+
+.bg-TRAIN {
+  background-color: #f4ba1b;
+}
+
+.bg-BIKE {
+  background-color: #2c6435;
+}
+
+.bg-WALK {
+  background-color: #a0c539;
+}
