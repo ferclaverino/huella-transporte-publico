@@ -5,4 +5,5 @@ export enum TransportMode {
   TRAIN = "TRAIN",
   BIKE = "BIKE",
   WALK = "WALK",
+  PUBLIC_TRANSPORT = "PUBLIC_TRANSPORT",
 }

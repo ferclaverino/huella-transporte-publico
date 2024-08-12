@@ -43,6 +43,7 @@ export class MainPage {
       TransportMode.TRAIN,
       TransportMode.BIKE,
       TransportMode.WALK,
+      // TransportMode.PUBLIC_TRANSPORT,
     ].forEach((transportMode: TransportMode) => {
       this.directionsService.getRouteForTransportMode(
         this.originPlaceId,

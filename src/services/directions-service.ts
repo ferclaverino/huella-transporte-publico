@@ -25,6 +25,7 @@ export class DirectionsService {
     },
     BIKE: { travelMode: google.maps.TravelMode.BICYCLING },
     WALK: { travelMode: google.maps.TravelMode.WALKING },
+    PUBLIC_TRANSPORT: { travelMode: google.maps.TravelMode.TRANSIT },
   };
 
   private directionsService: google.maps.DirectionsService;
