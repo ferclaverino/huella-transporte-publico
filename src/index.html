@@ -75,24 +75,72 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">Auto</th>
+                    <tr id="CAR-row">
+                      <th scope="row">
+                        <span class="badge rounded-pill bg-CAR">Auto</span>
+                      </th>
                       <td><span id="CAR-distance"></span></td>
                       <td></td>
                       <td><span id="CAR-emissions"></span></td>
                       <td></td>
                     </tr>
                     <tr>
-                      <th scope="row">Colectivo</th>
+                      <th scope="row">
+                        <span class="badge rounded-pill bg-BUS">Colectivo</span>
+                      </th>
                       <td><span id="BUS-distance"></span></td>
                       <td></td>
                       <td><span id="BUS-emissions"></span></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <span class="badge rounded-pill bg-SUBWAY">Subte</span>
+                      </th>
+                      <td><span id="SUBWAY-distance"></span></td>
+                      <td></td>
+                      <td><span id="SUBWAY-emissions"></span></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <span class="badge rounded-pill bg-TRAIN">Tren</span>
+                      </th>
+                      <td><span id="TRAIN-distance"></span></td>
+                      <td></td>
+                      <td><span id="TRAIN-emissions"></span></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <span class="badge rounded-pill bg-BIKE"
+                          >Bicicleta</span
+                        >
+                      </th>
+                      <td><span id="BIKE-distance"></span></td>
+                      <td></td>
+                      <td><span id="BIKE-emissions"></span></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <span class="badge rounded-pill bg-WALK">
+                          Caminando
+                        </span>
+                      </th>
+                      <td><span id="WALK-distance"></span></td>
+                      <td></td>
+                      <td><span id="WALK-emissions"></span></td>
                       <td></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-body" id="directionsPanel"></div>
           </div>
         </div>
         <div class="col-sm-6 h-100">
