@@ -3,6 +3,7 @@ import { FootprintService } from "./services/footprint-service";
 import { MapComponent } from "./components/map-component";
 import { SearchComponent } from "./components/search-component";
 import { FootPrintComponent } from "./components/footprint-component";
+import { TransportMode } from "./model/transport-mode";
 
 export class MainPage {
   private originPlaceId: string;
@@ -36,7 +37,11 @@ export class MainPage {
     if (!this.destinationPlaceId) return;
 
     this.directionsService
-      .getRouteForCar(this.originPlaceId, this.destinationPlaceId)
+      .getRouteForTransportMode(
+        this.originPlaceId,
+        this.destinationPlaceId,
+        TransportMode.CAR
+      )
       .then((directionsResult) => {
         this.mapComponent.displayForCar(directionsResult);
         this.footPrintComponent.displayForCar(
@@ -45,7 +50,11 @@ export class MainPage {
       });
 
     this.directionsService
-      .getRouteForBus(this.originPlaceId, this.destinationPlaceId)
+      .getRouteForTransportMode(
+        this.originPlaceId,
+        this.destinationPlaceId,
+        TransportMode.BUS
+      )
       .then((directionsResult) => {
         this.mapComponent.displayForBus(directionsResult);
         this.footPrintComponent.displayForBus(

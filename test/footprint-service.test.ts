@@ -7,7 +7,7 @@ import {
 } from "./route-for-bus";
 import { emissionFactorByTransport } from "../src/model/emission-factor";
 import { FootprintService } from "../src/services/footprint-service";
-import { TravelMode } from "../src/model/travel-mode";
+import { TransportMode } from "../src/model/transport-mode";
 
 describe("FootprintService", () => {
   test("given route for car with 1 step, then calculate distance", () => {
@@ -35,14 +35,14 @@ describe("FootprintService", () => {
     const footprintService = new FootprintService();
     expect(
       footprintService.getFootprint(routeForCarWith1Step).emissions
-    ).toEqual(15 / emissionFactorByTransport[TravelMode.CAR]);
+    ).toEqual(15 / emissionFactorByTransport[TransportMode.CAR]);
   });
 
   test("given route for bus with 1 step, then calculate emissions", () => {
     const footprintService = new FootprintService();
     expect(
       footprintService.getFootprint(routeForBusWith1Step).emissions
-    ).toEqual(15 / emissionFactorByTransport[TravelMode.BUS]);
+    ).toEqual(15 / emissionFactorByTransport[TransportMode.BUS]);
   });
 
   // TODO test for subway, train

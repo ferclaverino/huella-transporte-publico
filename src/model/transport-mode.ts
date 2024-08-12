@@ -1,4 +1,4 @@
-export const enum TravelMode {
+export const enum TransportMode {
   CAR = "CAR",
   BUS = "BUS",
   SUBWAY = "SUBWAY",

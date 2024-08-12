@@ -1,45 +1,62 @@
+import { TransportMode } from "../model/transport-mode";
+
+type TravelModeAndTransitMode = {
+  travelMode: google.maps.TravelMode;
+  transitMode?: google.maps.TransitMode;
+};
+
 export class DirectionsService {
+  private travelModeAndTransitModeByTransportMode: Record<
+    TransportMode,
+    TravelModeAndTransitMode
+  > = {
+    CAR: { travelMode: google.maps.TravelMode.DRIVING },
+    BUS: {
+      travelMode: google.maps.TravelMode.TRANSIT,
+      transitMode: google.maps.TransitMode.BUS,
+    },
+    SUBWAY: {
+      travelMode: google.maps.TravelMode.TRANSIT,
+      transitMode: google.maps.TransitMode.SUBWAY,
+    },
+    TRAIN: {
+      travelMode: google.maps.TravelMode.TRANSIT,
+      transitMode: google.maps.TransitMode.TRAIN,
+    },
+    BIKE: { travelMode: google.maps.TravelMode.BICYCLING },
+    WALK: { travelMode: google.maps.TravelMode.WALKING },
+  };
+
   private directionsService: google.maps.DirectionsService;
 
   constructor() {
     this.directionsService = new google.maps.DirectionsService();
   }
 
-  getRouteForCar(
-    originPlaceId: string,
-    destinationPlaceId: string
-  ): Promise<google.maps.DirectionsResult> {
-    return this.route(originPlaceId, destinationPlaceId, {
-      travelMode: google.maps.TravelMode.DRIVING,
-    });
-  }
-
-  getRouteForBus(
-    originPlaceId: string,
-    destinationPlaceId: string
-  ): Promise<google.maps.DirectionsResult> {
-    return this.route(originPlaceId, destinationPlaceId, {
-      travelMode: google.maps.TravelMode.TRANSIT,
-      transitOptions: { modes: [google.maps.TransitMode.BUS] },
-      // transitOptions: { modes: [google.maps.TransitMode.SUBWAY] },
-      // provideRouteAlternatives: true,
-    });
-  }
-
-  private route(
+  getRouteForTransportMode(
     originPlaceId: string,
     destinationPlaceId: string,
-    travelModeAndOptions
+    transportMode: TransportMode
   ): Promise<google.maps.DirectionsResult> {
-    const request = {
+    const travelModeAndTransitMode =
+      this.travelModeAndTransitModeByTransportMode[transportMode];
+
+    let request = {
       origin: {
         placeId: originPlaceId,
       },
       destination: {
         placeId: destinationPlaceId,
       },
-      ...travelModeAndOptions,
+      travelMode: travelModeAndTransitMode.travelMode,
     };
+
+    if (travelModeAndTransitMode.transitMode) {
+      request["transitOptions"] = {
+        modes: [travelModeAndTransitMode.transitMode],
+      };
+    }
+
     return this.directionsService
       .route(request)
       .catch((e) =>
