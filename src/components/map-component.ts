@@ -14,7 +14,9 @@ export class MapComponent {
     this.map = new google.maps.Map(document.getElementById(mapElementId)!, {
       zoom: 15,
       center: mapCenter,
-      draggable: false,
+      disableDefaultUI: true,
+      // TODO disable for scroll on mobile
+      // draggable: false,
     });
     this.renderers = this.buildRenderers();
     for (const transportMode in this.renderers) {
@@ -28,10 +30,11 @@ export class MapComponent {
   > {
     return Object.keys(TransportMode).reduce((renderers, transportMode) => {
       renderers[transportMode] = new google.maps.DirectionsRenderer({
+        suppressBicyclingLayer: true,
         polylineOptions: {
           strokeColor: colorByTransport[transportMode],
-          strokeWeight: 5,
-          strokeOpacity: 0.8,
+          strokeWeight: 8,
+          strokeOpacity: 0.9,
         },
       });
       return renderers;
@@ -39,7 +42,7 @@ export class MapComponent {
   }
 
   displayForTransportMode(
-    route: google.maps.DirectionsResult,
+    route: google.maps.DirectionsResult | null,
     transportMode: TransportMode
   ) {
     this.renderers[transportMode].setDirections(route);
