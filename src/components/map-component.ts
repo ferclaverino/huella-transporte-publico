@@ -34,7 +34,7 @@ export class MapComponent {
         polylineOptions: {
           strokeColor: colorByTransport[transportMode],
           strokeWeight: 8,
-          strokeOpacity: 0.9,
+          strokeOpacity: 0.5,
         },
       });
       return renderers;
