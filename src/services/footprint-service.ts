@@ -1,8 +1,6 @@
-import {
-  emissionFactorByTransport,
-  TransportType,
-} from "../model/emission-factor";
+import { emissionFactorByTransport } from "../model/emission-factor";
 import { Footprint } from "../model/footprint";
+import { TravelMode } from "../model/travel-mode";
 
 // because can´t use google.maps.TravelMode on jest
 const enum GoogleTravelMode {
@@ -29,16 +27,16 @@ export class FootprintService {
     );
   }
 
-  private getTransportType(step: google.maps.DirectionsStep): TransportType {
+  private getTravelType(step: google.maps.DirectionsStep): TravelMode {
     if (step.travel_mode === GoogleTravelMode.TRANSIT.toString()) {
-      return TransportType.BUS;
+      return TravelMode.BUS;
     }
-    return TransportType.CAR;
+    return TravelMode.CAR;
   }
 
   private toFootprint(step: google.maps.DirectionsStep) {
     const distance = step.distance ? step.distance.value : 0;
-    const transportType = this.getTransportType(step);
+    const transportType = this.getTravelType(step);
     const emissionFactor = emissionFactorByTransport[transportType];
     const emissions = distance / emissionFactor;
     return {

@@ -1,11 +1,11 @@
-// TODO include subte, tren (?)
-export const enum TransportType {
-  CAR = "car",
-  BUS = "bus",
-}
+import { TravelMode } from "./travel-mode";
 
 // emission (in CO2 gr) = factor * distance (in km)
-export const emissionFactorByTransport: Record<TransportType, number> = {
-  car: 10,
-  bus: 100,
+export const emissionFactorByTransport: Record<TravelMode, number> = {
+  CAR: 50,
+  BUS: 100,
+  SUBWAY: 30,
+  TRAIN: 20,
+  BIKE: 0,
+  WALK: 0,
 };
