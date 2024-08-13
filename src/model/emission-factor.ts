@@ -8,4 +8,5 @@ export const emissionFactorByTransport: Record<TransportMode, number> = {
   TRAIN: 20,
   BIKE: 0,
   WALK: 0,
+  PUBLIC_TRANSPORT: 0,
 };
