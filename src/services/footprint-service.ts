@@ -10,6 +10,11 @@ const enum GoogleTravelMode {
   WALKING = "WALKING",
 }
 
+const enum GoogleVehicleType {
+  BUS = "BUS",
+  SUBWAY = "SUBWAY",
+}
+
 export const emptyFootprint = { distance: 0, emissions: 0 };
 
 export class FootprintService {
@@ -18,23 +23,15 @@ export class FootprintService {
   ): Footprint {
     if (!directionsResult) return emptyFootprint;
 
-    return (
-      directionsResult.routes[0].legs[0].steps
-        // .filter((step) => this.hasFootprint(step))
-        .map((step): Footprint => this.toFootprint(step))
-        .reduce(
-          (sumOfFootprint: Footprint, footprint: Footprint) =>
-            this.sumFootprint(sumOfFootprint, footprint),
-          { ...emptyFootprint }
-        )
-    );
-  }
+    console.log(directionsResult);
 
-  private hasFootprint(step: google.maps.DirectionsStep) {
-    return (
-      step.travel_mode === GoogleTravelMode.DRIVING.toString() ||
-      step.travel_mode === GoogleTravelMode.TRANSIT.toString()
-    );
+    return directionsResult.routes[0].legs[0].steps
+      .map((step): Footprint => this.toFootprint(step))
+      .reduce(
+        (sumOfFootprint: Footprint, footprint: Footprint) =>
+          this.sumFootprint(sumOfFootprint, footprint),
+        { ...emptyFootprint }
+      );
   }
 
   private getTransportMode(step: google.maps.DirectionsStep): TransportMode {
@@ -44,7 +41,14 @@ export class FootprintService {
       return TransportMode.BIKE;
     } else if (step.travel_mode === GoogleTravelMode.WALKING.toString()) {
       return TransportMode.WALK;
+    } else {
+      if (
+        step.transit?.line.vehicle.type === GoogleVehicleType.SUBWAY.toString()
+      ) {
+        return TransportMode.SUBWAY;
+      }
     }
+
     return TransportMode.BUS;
   }
 

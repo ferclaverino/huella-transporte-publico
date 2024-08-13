@@ -10,6 +10,13 @@ export const routeForBusWith1Step = {
                 value: 15,
               },
               travel_mode: "TRANSIT",
+              transit: {
+                line: {
+                  vehicle: {
+                    type: "BUS",
+                  },
+                },
+              },
             },
           ],
         },
@@ -30,6 +37,13 @@ export const routeForBusWithWalkingStep = {
                 value: 15,
               },
               travel_mode: "TRANSIT",
+              transit: {
+                line: {
+                  vehicle: {
+                    type: "BUS",
+                  },
+                },
+              },
             },
             {
               distance: {
