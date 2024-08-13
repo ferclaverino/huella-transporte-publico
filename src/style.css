@@ -37,3 +37,7 @@
 .bg-PUBLIC_TRANSPORT {
   background-color: #f1882c;
 }
+
+table tbody tr {
+  cursor: pointer;
+}

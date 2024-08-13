@@ -15,8 +15,7 @@ export class MapComponent {
       zoom: 15,
       center: mapCenter,
       disableDefaultUI: true,
-      // TODO disable for scroll on mobile
-      // draggable: false,
+      gestureHandling: "cooperative",
     });
     this.renderers = this.buildRenderers();
     for (const transportMode in this.renderers) {
@@ -43,7 +42,7 @@ export class MapComponent {
     this.renderers[transportMode].setDirections(route);
   }
 
-  highlightTransportMode(transportMode: TransportMode) {
+  selectTransportMode(transportMode: TransportMode) {
     for (const t in this.renderers) {
       if (this.renderers[t].directions) {
         if (t === transportMode) {

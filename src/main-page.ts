@@ -20,8 +20,8 @@ export class MainPage {
     searchComponent.onDestinationChange((placeId) =>
       this.setDestinationPlaceId(placeId)
     );
-    footPrintComponent.onHover((transportMode: TransportMode) => {
-      this.mapComponent.highlightTransportMode(transportMode);
+    footPrintComponent.onSelect((transportMode: TransportMode) => {
+      this.mapComponent.selectTransportMode(transportMode);
     });
   }
 
