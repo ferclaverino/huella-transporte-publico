@@ -78,10 +78,10 @@
                   <thead>
                     <tr>
                       <th scope="col">Medio de transporte</th>
-                      <th scope="col">Distancia (km)</th>
-                      <th scope="col">Tiempo (min)</th>
-                      <th scope="col">Emisión (gr CO2)</th>
-                      <th scope="col">Arbolitos</th>
+                      <th scope="col" class="text-end">Distancia (km)</th>
+                      <th scope="col" class="text-end">Tiempo (min)</th>
+                      <th scope="col" class="text-end">Emisión (gr CO2)</th>
+                      <th scope="col" class="text-end">Arbolitos</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -89,37 +89,49 @@
                       <th scope="row">
                         <span class="badge rounded-pill bg-CAR">Auto</span>
                       </th>
-                      <td><span id="CAR-distance"></span></td>
-                      <td><span id="CAR-duration"></span></td>
-                      <td><span id="CAR-emissions"></span></td>
-                      <td></td>
+                      <td class="text-end"><span id="CAR-distance"></span></td>
+                      <td class="text-end"><span id="CAR-duration"></span></td>
+                      <td class="text-end"><span id="CAR-emissions"></span></td>
+                      <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="BUS">
                       <th scope="row">
                         <span class="badge rounded-pill bg-BUS">Colectivo</span>
                       </th>
-                      <td><span id="BUS-distance"></span></td>
-                      <td><span id="BUS-duration"></span></td>
-                      <td><span id="BUS-emissions"></span></td>
-                      <td></td>
+                      <td class="text-end"><span id="BUS-distance"></span></td>
+                      <td class="text-end"><span id="BUS-duration"></span></td>
+                      <td class="text-end"><span id="BUS-emissions"></span></td>
+                      <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="SUBWAY">
                       <th scope="row">
                         <span class="badge rounded-pill bg-SUBWAY">Subte</span>
                       </th>
-                      <td><span id="SUBWAY-distance"></span></td>
-                      <td><span id="SUBWAY-duration"></span></td>
-                      <td><span id="SUBWAY-emissions"></span></td>
-                      <td></td>
+                      <td class="text-end">
+                        <span id="SUBWAY-distance"></span>
+                      </td>
+                      <td class="text-end">
+                        <span id="SUBWAY-duration"></span>
+                      </td>
+                      <td class="text-end">
+                        <span id="SUBWAY-emissions"></span>
+                      </td>
+                      <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="TRAIN">
                       <th scope="row">
                         <span class="badge rounded-pill bg-TRAIN">Tren</span>
                       </th>
-                      <td><span id="TRAIN-distance"></span></td>
-                      <td><span id="TRAIN-duration"></span></td>
-                      <td><span id="TRAIN-emissions"></span></td>
-                      <td></td>
+                      <td class="text-end">
+                        <span id="TRAIN-distance"></span>
+                      </td>
+                      <td class="text-end">
+                        <span id="TRAIN-duration"></span>
+                      </td>
+                      <td class="text-end">
+                        <span id="TRAIN-emissions"></span>
+                      </td>
+                      <td class="text-end"></td>
                     </tr>
                     <!-- <tr data-transport-mode="PUBLIC_TRANSPORT">
                       <th scope="row">
@@ -144,10 +156,12 @@
                           >Bicicleta</span
                         >
                       </th>
-                      <td><span id="BIKE-distance"></span></td>
-                      <td><span id="BIKE-duration"></span></td>
-                      <td><span id="BIKE-emissions"></span></td>
-                      <td></td>
+                      <td class="text-end"><span id="BIKE-distance"></span></td>
+                      <td class="text-end"><span id="BIKE-duration"></span></td>
+                      <td class="text-end">
+                        <span id="BIKE-emissions"></span>
+                      </td>
+                      <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="WALK">
                       <th scope="row">
@@ -155,10 +169,12 @@
                           Caminando
                         </span>
                       </th>
-                      <td><span id="WALK-distance"></span></td>
-                      <td><span id="WALK-duration"></span></td>
-                      <td><span id="WALK-emissions"></span></td>
-                      <td></td>
+                      <td class="text-end"><span id="WALK-distance"></span></td>
+                      <td class="text-end"><span id="WALK-duration"></span></td>
+                      <td class="text-end">
+                        <span id="WALK-emissions"></span>
+                      </td>
+                      <td class="text-end"></td>
                     </tr>
                   </tbody>
                 </table>
