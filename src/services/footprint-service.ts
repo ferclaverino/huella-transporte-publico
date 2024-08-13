@@ -17,7 +17,11 @@ const enum GoogleVehicleType {
   HEAVY_RAIL = "HEAVY_RAIL",
 }
 
-export const emptyFootprint = { distance: 0, emissions: 0 };
+export const emptyFootprint: Footprint = {
+  distance: 0,
+  emissions: 0,
+  duration: 0,
+};
 
 export class FootprintService {
   getFootprint(
@@ -59,14 +63,16 @@ export class FootprintService {
     return TransportMode.BUS;
   }
 
-  private toFootprint(step: google.maps.DirectionsStep) {
+  private toFootprint(step: google.maps.DirectionsStep): Footprint {
     const distance = step.distance ? step.distance.value : 0;
     const transportType = this.getTransportMode(step);
     const emissionFactor = emissionFactorByTransport[transportType];
     const emissions = distance * emissionFactor;
+    const duration = step.duration ? step.duration.value : 0;
     return {
       distance,
       emissions,
+      duration,
     };
   }
 
@@ -76,6 +82,7 @@ export class FootprintService {
   ): Footprint {
     sumOfFootprint.distance += footprint.distance;
     sumOfFootprint.emissions += footprint.emissions;
+    sumOfFootprint.duration += footprint.duration;
     return sumOfFootprint;
   }
 }

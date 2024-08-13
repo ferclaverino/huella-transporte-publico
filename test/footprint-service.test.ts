@@ -43,6 +43,13 @@ describe("FootprintService", () => {
         footprintService.getFootprint(routeForCarWith1Step).emissions
       ).toEqual(1000 * emissionFactorByTransport[TransportMode.CAR]);
     });
+
+    test("with 1 step, then calculate duration", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForCarWith1Step).duration
+      ).toEqual(60);
+    });
   });
 
   describe("given route for bus", () => {
@@ -51,6 +58,7 @@ describe("FootprintService", () => {
       expect(footprintService.getFootprint(routeForBusWith1Step)).toEqual({
         distance: 1500,
         emissions: 1500 * emissionFactorByTransport[TransportMode.BUS],
+        duration: 0,
       });
     });
 
@@ -62,6 +70,7 @@ describe("FootprintService", () => {
           emissions:
             1500 * emissionFactorByTransport[TransportMode.BUS] +
             100 * emissionFactorByTransport[TransportMode.WALK],
+          duration: 0,
         }
       );
     });
@@ -73,6 +82,7 @@ describe("FootprintService", () => {
       expect(footprintService.getFootprint(routeForBikeWith1Step)).toEqual({
         distance: 1500,
         emissions: 1500 * emissionFactorByTransport[TransportMode.BIKE],
+        duration: 0,
       });
     });
   });
@@ -83,6 +93,7 @@ describe("FootprintService", () => {
       expect(footprintService.getFootprint(routeForWalkWith1Step)).toEqual({
         distance: 500,
         emissions: 500 * emissionFactorByTransport[TransportMode.WALK],
+        duration: 0,
       });
     });
   });
@@ -93,6 +104,7 @@ describe("FootprintService", () => {
       expect(footprintService.getFootprint(routeForSubwayWith1Step)).toEqual({
         distance: 4500,
         emissions: 4500 * emissionFactorByTransport[TransportMode.SUBWAY],
+        duration: 0,
       });
     });
   });
@@ -103,6 +115,7 @@ describe("FootprintService", () => {
       expect(footprintService.getFootprint(routeForTrainWith1Step)).toEqual({
         distance: 7500,
         emissions: 7500 * emissionFactorByTransport[TransportMode.TRAIN],
+        duration: 0,
       });
     });
   });

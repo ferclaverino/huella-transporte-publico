@@ -1,4 +1,5 @@
 export interface Footprint {
-  distance: number;
-  emissions: number;
+  distance: number; // in km
+  emissions: number; // in gr Co2
+  duration: number; // in seconds
 }
