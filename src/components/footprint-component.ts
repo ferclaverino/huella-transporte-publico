@@ -13,8 +13,12 @@ export class FootPrintComponent {
     const emisionsElement = document.getElementById(
       `${transportMode}-emissions`
     )!;
+    const durationElement = document.getElementById(
+      `${transportMode}-duration`
+    )!;
     distanceElement.innerHTML = footprintViewModel.distanceInKm;
     emisionsElement.innerHTML = footprintViewModel.emissionsInGr;
+    durationElement.innerHTML = footprintViewModel.durationInMin;
   }
 
   onSelect(select: (transportMode: TransportMode | null) => void) {

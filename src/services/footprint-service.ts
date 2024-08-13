@@ -29,8 +29,6 @@ export class FootprintService {
   ): Footprint {
     if (!directionsResult) return emptyFootprint;
 
-    console.log(directionsResult);
-
     return directionsResult.routes[0].legs[0].steps
       .map((step): Footprint => this.toFootprint(step))
       .reduce(
