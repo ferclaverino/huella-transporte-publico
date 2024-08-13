@@ -2,11 +2,11 @@ import { TransportMode } from "./transport-mode";
 
 // emission (in CO2 gr) = factor * distance (in km)
 export const emissionFactorByTransport: Record<TransportMode, number> = {
-  CAR: 0.5,
-  BUS: 0.4,
-  SUBWAY: 0.4,
-  TRAIN: 0.2,
-  BIKE: 0,
-  WALK: 0,
+  CAR: 100,
+  BUS: 10,
+  SUBWAY: 1,
+  TRAIN: 0.1,
+  BIKE: 0.01,
+  WALK: 0.001,
   PUBLIC_TRANSPORT: 0,
 };

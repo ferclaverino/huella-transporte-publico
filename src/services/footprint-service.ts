@@ -7,6 +7,7 @@ const enum GoogleTravelMode {
   DRIVING = "DRIVING",
   TRANSIT = "TRANSIT",
   BICYCLING = "BICYCLING",
+  WALKING = "WALKING",
 }
 
 export const emptyFootprint = { distance: 0, emissions: 0 };
@@ -41,6 +42,8 @@ export class FootprintService {
       return TransportMode.CAR;
     } else if (step.travel_mode === GoogleTravelMode.BICYCLING.toString()) {
       return TransportMode.BIKE;
+    } else if (step.travel_mode === GoogleTravelMode.WALKING.toString()) {
+      return TransportMode.WALK;
     }
     return TransportMode.BUS;
   }

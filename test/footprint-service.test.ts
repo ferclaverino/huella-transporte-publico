@@ -12,6 +12,7 @@ import {
 } from "../src/services/footprint-service";
 import { TransportMode } from "../src/model/transport-mode";
 import { routeForBikeWith1Step } from "./route-for-bike";
+import { routeForWalkWith1Step } from "./route-for-walk";
 
 describe("FootprintService", () => {
   test("given empty route, then calculate distance", () => {
@@ -64,6 +65,16 @@ describe("FootprintService", () => {
       expect(footprintService.getFootprint(routeForBikeWith1Step)).toEqual({
         distance: 1500,
         emissions: 1500 * emissionFactorByTransport[TransportMode.BIKE],
+      });
+    });
+  });
+
+  describe("given route for walk", () => {
+    test("with 1 step, then calculate footprint", () => {
+      const footprintService = new FootprintService();
+      expect(footprintService.getFootprint(routeForWalkWith1Step)).toEqual({
+        distance: 500,
+        emissions: 500 * emissionFactorByTransport[TransportMode.WALK],
       });
     });
   });
