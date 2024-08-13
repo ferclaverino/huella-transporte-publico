@@ -18,40 +18,42 @@ describe("FootprintService", () => {
     expect(footprintService.getFootprint(null)).toEqual(emptyFootprint);
   });
 
-  test("given route for car with 1 step, then calculate distance", () => {
-    const footprintService = new FootprintService();
-    expect(
-      footprintService.getFootprint(routeForCarWith1Step).distance
-    ).toEqual(15);
+  describe("given route for car", () => {
+    test("with 1 step, then calculate distance", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForCarWith1Step).distance
+      ).toEqual(15);
+    });
+
+    test("with 2 steps, then calculate distance", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForCarWith2Steps).distance
+      ).toEqual(30);
+    });
+
+    test("with 1 step, then calculate emissions", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForCarWith1Step).emissions
+      ).toEqual(15 / emissionFactorByTransport[TransportMode.CAR]);
+    });
   });
 
-  test("given route for car with 2 steps, then calculate distance", () => {
-    const footprintService = new FootprintService();
-    expect(
-      footprintService.getFootprint(routeForCarWith2Steps).distance
-    ).toEqual(30);
-  });
+  describe("given route for bus", () => {
+    test("with walking step, then calculate distance", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForBusWithWalkingStep).distance
+      ).toEqual(30);
+    });
 
-  test("given route for bus with walking step, then calculate distance", () => {
-    const footprintService = new FootprintService();
-    expect(
-      footprintService.getFootprint(routeForBusWithWalkingStep).distance
-    ).toEqual(15);
+    test("with 1 step, then calculate emissions", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForBusWith1Step).emissions
+      ).toEqual(15 / emissionFactorByTransport[TransportMode.BUS]);
+    });
   });
-
-  test("given route for car with 1 step, then calculate emissions", () => {
-    const footprintService = new FootprintService();
-    expect(
-      footprintService.getFootprint(routeForCarWith1Step).emissions
-    ).toEqual(15 / emissionFactorByTransport[TransportMode.CAR]);
-  });
-
-  test("given route for bus with 1 step, then calculate emissions", () => {
-    const footprintService = new FootprintService();
-    expect(
-      footprintService.getFootprint(routeForBusWith1Step).emissions
-    ).toEqual(15 / emissionFactorByTransport[TransportMode.BUS]);
-  });
-
-  // TODO test for subway, train
 });
