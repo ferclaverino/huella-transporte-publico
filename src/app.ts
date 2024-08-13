@@ -9,9 +9,9 @@ function initMap() {
   const directionsService = new DirectionsService();
   const footprintService = new FootprintService();
 
-  const mapComponent = new MapComponent("map");
+  const mapComponent = new MapComponent("map", "directions");
   const searchComponent = new SearchComponent("origin", "destination");
-  const footPrintComponent = new FootPrintComponent("car", "bus");
+  const footPrintComponent = new FootPrintComponent();
   const mainPageObject = new MainPage(
     directionsService,
     footprintService,

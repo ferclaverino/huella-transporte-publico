@@ -10,8 +10,9 @@ export class MapComponent {
   private map: google.maps.Map;
   private renderers: Record<TransportMode, google.maps.DirectionsRenderer>;
   private selectedTransportMode: TransportMode | null = null;
+  private directionsElement: HTMLElement;
 
-  constructor(mapElementId: string) {
+  constructor(mapElementId: string, directionsElementId: string) {
     this.map = new google.maps.Map(document.getElementById(mapElementId)!, {
       zoom: 15,
       center: mapCenter,
@@ -22,6 +23,7 @@ export class MapComponent {
     for (const transportMode in this.renderers) {
       this.renderers[transportMode].setMap(this.map);
     }
+    this.directionsElement = document.getElementById(directionsElementId)!;
   }
 
   private buildRenderers(): Record<
@@ -52,17 +54,19 @@ export class MapComponent {
   }
 
   private displayTransportModeAsSelected(transportMode: TransportMode) {
-    this.renderers[transportMode].setOptions(
+    const renderer = this.renderers[transportMode];
+    renderer.setOptions(
       this.getRendererOptionsForSelected(TransportMode[transportMode])
     );
-    this.redrawDirections(this.renderers[transportMode]);
+    renderer.setPanel(this.directionsElement);
+    this.redrawDirections(renderer);
   }
 
   private displayTransportModeAsUnSelected(transportMode: TransportMode) {
-    this.renderers[transportMode].setOptions(
-      this.getRendererOptions(TransportMode[transportMode])
-    );
-    this.redrawDirections(this.renderers[transportMode]);
+    const renderer = this.renderers[transportMode];
+    renderer.setOptions(this.getRendererOptions(TransportMode[transportMode]));
+    renderer.setPanel(null);
+    this.redrawDirections(renderer);
   }
 
   private redrawDirections(renderer: google.maps.DirectionsRenderer) {
