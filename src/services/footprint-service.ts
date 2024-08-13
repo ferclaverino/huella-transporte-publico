@@ -10,9 +10,11 @@ const enum GoogleTravelMode {
   WALKING = "WALKING",
 }
 
+// TODO support other trains types: https://developers.google.com/maps/documentation/javascript/reference/directions#VehicleType
 const enum GoogleVehicleType {
   BUS = "BUS",
   SUBWAY = "SUBWAY",
+  HEAVY_RAIL = "HEAVY_RAIL",
 }
 
 export const emptyFootprint = { distance: 0, emissions: 0 };
@@ -41,14 +43,19 @@ export class FootprintService {
       return TransportMode.BIKE;
     } else if (step.travel_mode === GoogleTravelMode.WALKING.toString()) {
       return TransportMode.WALK;
-    } else {
-      if (
-        step.transit?.line.vehicle.type === GoogleVehicleType.SUBWAY.toString()
-      ) {
-        return TransportMode.SUBWAY;
-      }
     }
+    return this.getTransportModeForTransit(step);
+  }
 
+  private getTransportModeForTransit(
+    step: google.maps.DirectionsStep
+  ): TransportMode {
+    const vehicleType = step.transit?.line.vehicle.type;
+    if (vehicleType === GoogleVehicleType.SUBWAY.toString()) {
+      return TransportMode.SUBWAY;
+    } else if (vehicleType === GoogleVehicleType.HEAVY_RAIL.toString()) {
+      return TransportMode.TRAIN;
+    }
     return TransportMode.BUS;
   }
 

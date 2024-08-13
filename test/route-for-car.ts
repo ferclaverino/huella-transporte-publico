@@ -6,8 +6,8 @@ export const routeForCarWith1Step = {
           steps: [
             {
               distance: {
-                text: "15 m",
-                value: 15,
+                text: "1000 m",
+                value: 1000,
               },
               travel_mode: "DRIVING",
             },
@@ -26,15 +26,15 @@ export const routeForCarWith2Steps = {
           steps: [
             {
               distance: {
-                text: "15 m",
-                value: 15,
+                text: "1000 m",
+                value: 1000,
               },
               travel_mode: "DRIVING",
             },
             {
               distance: {
-                text: "15 m",
-                value: 15,
+                text: "1000 m",
+                value: 1000,
               },
               travel_mode: "DRIVING",
             },

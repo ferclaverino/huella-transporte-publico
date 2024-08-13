@@ -6,8 +6,8 @@ export const routeForBusWith1Step = {
           steps: [
             {
               distance: {
-                text: "15 m",
-                value: 15,
+                text: "1500 m",
+                value: 1500,
               },
               travel_mode: "TRANSIT",
               transit: {
@@ -33,8 +33,8 @@ export const routeForBusWithWalkingStep = {
           steps: [
             {
               distance: {
-                text: "15 m",
-                value: 15,
+                text: "1500 m",
+                value: 1500,
               },
               travel_mode: "TRANSIT",
               transit: {
@@ -47,8 +47,8 @@ export const routeForBusWithWalkingStep = {
             },
             {
               distance: {
-                text: "15 m",
-                value: 15,
+                text: "100 m",
+                value: 100,
               },
               travel_mode: "WALKING",
             },
