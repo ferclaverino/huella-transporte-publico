@@ -20,6 +20,9 @@ export class MainPage {
     searchComponent.onDestinationChange((placeId) =>
       this.setDestinationPlaceId(placeId)
     );
+    footPrintComponent.onHover((transportMode: TransportMode) => {
+      this.mapComponent.highlightTransportMode(transportMode);
+    });
   }
 
   setOriginPlaceId(originPlaceId: string) {

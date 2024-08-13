@@ -29,14 +29,9 @@ export class MapComponent {
     google.maps.DirectionsRenderer
   > {
     return Object.keys(TransportMode).reduce((renderers, transportMode) => {
-      renderers[transportMode] = new google.maps.DirectionsRenderer({
-        suppressBicyclingLayer: true,
-        polylineOptions: {
-          strokeColor: colorByTransport[transportMode],
-          strokeWeight: 8,
-          strokeOpacity: 0.5,
-        },
-      });
+      renderers[transportMode] = new google.maps.DirectionsRenderer(
+        this.getRendererOptions(TransportMode[transportMode])
+      );
       return renderers;
     }, {} as any as Record<TransportMode, google.maps.DirectionsRenderer>);
   }
@@ -46,5 +41,44 @@ export class MapComponent {
     transportMode: TransportMode
   ) {
     this.renderers[transportMode].setDirections(route);
+  }
+
+  highlightTransportMode(transportMode: TransportMode) {
+    for (const t in this.renderers) {
+      if (this.renderers[t].directions) {
+        if (t === transportMode) {
+          this.renderers[t].setOptions(
+            this.getRendererOptionsForHighlight(TransportMode[t])
+          );
+        } else {
+          this.renderers[t].setOptions(
+            this.getRendererOptions(TransportMode[t])
+          );
+        }
+        this.renderers[t].setDirections(this.renderers[t].directions);
+      }
+    }
+  }
+
+  private getRendererOptions(transportMode: TransportMode) {
+    return {
+      suppressBicyclingLayer: true,
+      polylineOptions: {
+        strokeColor: colorByTransport[transportMode],
+        strokeWeight: 5,
+        strokeOpacity: 0.5,
+      },
+    };
+  }
+
+  private getRendererOptionsForHighlight(transportMode: TransportMode) {
+    return {
+      suppressBicyclingLayer: true,
+      polylineOptions: {
+        strokeColor: colorByTransport[transportMode],
+        strokeWeight: 10,
+        strokeOpacity: 1,
+      },
+    };
   }
 }
