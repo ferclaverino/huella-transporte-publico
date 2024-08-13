@@ -17,7 +17,7 @@ export class FootPrintComponent {
     emisionsElement.innerHTML = footprintViewModel.emissionsInGr;
   }
 
-  onSelect(select: (transportMode: TransportMode) => void) {
+  onSelect(select: (transportMode: TransportMode | null) => void) {
     document.querySelectorAll("table tbody tr").forEach((element) => {
       element.addEventListener("click", () => {
         const transportModeValue = element.getAttribute(
@@ -29,8 +29,8 @@ export class FootPrintComponent {
           this.selectedTransportMode = null;
         } else {
           this.selectedTransportMode = transportModeElement;
-          select(this.selectedTransportMode!);
         }
+        select(this.selectedTransportMode);
         this.displaySelected();
       });
     });

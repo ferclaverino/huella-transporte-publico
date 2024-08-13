@@ -9,6 +9,7 @@ export const mapCenter = {
 export class MapComponent {
   private map: google.maps.Map;
   private renderers: Record<TransportMode, google.maps.DirectionsRenderer>;
+  private selectedTransportMode: TransportMode | null = null;
 
   constructor(mapElementId: string) {
     this.map = new google.maps.Map(document.getElementById(mapElementId)!, {
@@ -42,21 +43,31 @@ export class MapComponent {
     this.renderers[transportMode].setDirections(route);
   }
 
-  selectTransportMode(transportMode: TransportMode) {
-    for (const t in this.renderers) {
-      if (this.renderers[t].directions) {
-        if (t === transportMode) {
-          this.renderers[t].setOptions(
-            this.getRendererOptionsForHighlight(TransportMode[t])
-          );
-        } else {
-          this.renderers[t].setOptions(
-            this.getRendererOptions(TransportMode[t])
-          );
-        }
-        this.renderers[t].setDirections(this.renderers[t].directions);
-      }
-    }
+  selectTransportMode(transportMode: TransportMode | null) {
+    if (this.selectedTransportMode)
+      this.displayTransportModeAsUnSelected(this.selectedTransportMode);
+    this.selectedTransportMode = transportMode;
+    if (this.selectedTransportMode)
+      this.displayTransportModeAsSelected(this.selectedTransportMode);
+  }
+
+  private displayTransportModeAsSelected(transportMode: TransportMode) {
+    this.renderers[transportMode].setOptions(
+      this.getRendererOptionsForSelected(TransportMode[transportMode])
+    );
+    this.redrawDirections(this.renderers[transportMode]);
+  }
+
+  private displayTransportModeAsUnSelected(transportMode: TransportMode) {
+    this.renderers[transportMode].setOptions(
+      this.getRendererOptions(TransportMode[transportMode])
+    );
+    this.redrawDirections(this.renderers[transportMode]);
+  }
+
+  private redrawDirections(renderer: google.maps.DirectionsRenderer) {
+    if (renderer.getDirections())
+      renderer.setDirections(renderer.getDirections());
   }
 
   private getRendererOptions(transportMode: TransportMode) {
@@ -70,7 +81,7 @@ export class MapComponent {
     };
   }
 
-  private getRendererOptionsForHighlight(transportMode: TransportMode) {
+  private getRendererOptionsForSelected(transportMode: TransportMode) {
     return {
       suppressBicyclingLayer: true,
       polylineOptions: {
