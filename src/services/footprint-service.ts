@@ -6,6 +6,7 @@ import { TransportMode } from "../model/transport-mode";
 const enum GoogleTravelMode {
   DRIVING = "DRIVING",
   TRANSIT = "TRANSIT",
+  BICYCLING = "BICYCLING",
 }
 
 export const emptyFootprint = { distance: 0, emissions: 0 };
@@ -14,18 +15,18 @@ export class FootprintService {
   getFootprint(
     directionsResult: google.maps.DirectionsResult | null
   ): Footprint {
-    // add test
-
     if (!directionsResult) return emptyFootprint;
 
-    return directionsResult.routes[0].legs[0].steps
-      .filter((step) => this.hasFootprint(step))
-      .map((step): Footprint => this.toFootprint(step))
-      .reduce(
-        (sumOfFootprint: Footprint, footprint: Footprint) =>
-          this.sumFootprint(sumOfFootprint, footprint),
-        { ...emptyFootprint }
-      );
+    return (
+      directionsResult.routes[0].legs[0].steps
+        // .filter((step) => this.hasFootprint(step))
+        .map((step): Footprint => this.toFootprint(step))
+        .reduce(
+          (sumOfFootprint: Footprint, footprint: Footprint) =>
+            this.sumFootprint(sumOfFootprint, footprint),
+          { ...emptyFootprint }
+        )
+    );
   }
 
   private hasFootprint(step: google.maps.DirectionsStep) {
@@ -35,18 +36,20 @@ export class FootprintService {
     );
   }
 
-  private getTravelType(step: google.maps.DirectionsStep): TransportMode {
-    if (step.travel_mode === GoogleTravelMode.TRANSIT.toString()) {
-      return TransportMode.BUS;
+  private getTransportMode(step: google.maps.DirectionsStep): TransportMode {
+    if (step.travel_mode === GoogleTravelMode.DRIVING.toString()) {
+      return TransportMode.CAR;
+    } else if (step.travel_mode === GoogleTravelMode.BICYCLING.toString()) {
+      return TransportMode.BIKE;
     }
-    return TransportMode.CAR;
+    return TransportMode.BUS;
   }
 
   private toFootprint(step: google.maps.DirectionsStep) {
     const distance = step.distance ? step.distance.value : 0;
-    const transportType = this.getTravelType(step);
+    const transportType = this.getTransportMode(step);
     const emissionFactor = emissionFactorByTransport[transportType];
-    const emissions = distance / emissionFactor;
+    const emissions = distance * emissionFactor;
     return {
       distance,
       emissions,
