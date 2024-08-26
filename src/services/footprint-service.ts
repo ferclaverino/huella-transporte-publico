@@ -15,6 +15,7 @@ const enum GoogleVehicleType {
   BUS = "BUS",
   SUBWAY = "SUBWAY",
   HEAVY_RAIL = "HEAVY_RAIL",
+  RAIL = "RAIL",
 }
 
 export const emptyFootprint: Footprint = {
@@ -61,10 +62,10 @@ export class FootprintService {
     const vehicleType = step.transit?.line.vehicle.type;
     if (vehicleType === GoogleVehicleType.SUBWAY.toString()) {
       return TransportMode.SUBWAY;
-    } else if (vehicleType === GoogleVehicleType.HEAVY_RAIL.toString()) {
-      return TransportMode.TRAIN;
+    } else if (vehicleType === GoogleVehicleType.BUS.toString()) {
+      return TransportMode.BUS;
     }
-    return TransportMode.BUS;
+    return TransportMode.TRAIN;
   }
 
   private toFootprint(

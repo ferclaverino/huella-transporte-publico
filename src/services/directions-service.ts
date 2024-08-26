@@ -11,7 +11,6 @@ export class DirectionsService {
     TravelModeAndTransitMode
   > = {
     CAR: { travelMode: google.maps.TravelMode.DRIVING },
-    // TODO remove
     CAR_BIG: { travelMode: google.maps.TravelMode.DRIVING },
     BUS: {
       travelMode: google.maps.TravelMode.TRANSIT,

@@ -1,4 +1,4 @@
-export const routeForTrainWith1Step = {
+export const routeForHeavyRailWith1Step = {
   routes: [
     {
       legs: [
@@ -14,6 +14,33 @@ export const routeForTrainWith1Step = {
                 line: {
                   vehicle: {
                     type: "HEAVY_RAIL",
+                  },
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+} as google.maps.DirectionsResult;
+
+export const routeForRailWith1Step = {
+  routes: [
+    {
+      legs: [
+        {
+          steps: [
+            {
+              distance: {
+                text: "7500 m",
+                value: 7500,
+              },
+              travel_mode: "TRANSIT",
+              transit: {
+                line: {
+                  vehicle: {
+                    type: "RAIL",
                   },
                 },
               },

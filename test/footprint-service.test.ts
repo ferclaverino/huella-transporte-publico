@@ -14,7 +14,10 @@ import { TransportMode } from "../src/model/transport-mode";
 import { routeForBikeWith1Step } from "./route-for-bike";
 import { routeForWalkWith1Step } from "./route-for-walk";
 import { routeForSubwayWith1Step } from "./route-for-subway";
-import { routeForTrainWith1Step } from "./route-for-train";
+import {
+  routeForHeavyRailWith1Step,
+  routeForRailWith1Step,
+} from "./route-for-train";
 
 describe("FootprintService", () => {
   test("given empty route, then calculate distance", () => {
@@ -175,13 +178,31 @@ describe("FootprintService", () => {
     });
   });
 
-  describe("given route for train", () => {
+  describe("given route for heavy rail (train)", () => {
     test("with 1 step, then calculate footprint", () => {
       const footprintService = new FootprintService();
       expect(
         footprintService.getFootprint(
           TransportMode.TRAIN,
-          routeForTrainWith1Step
+          routeForHeavyRailWith1Step
+        )
+      ).toEqual({
+        distance: 7500,
+        emissions: 7500 * emissionFactorByTransport[TransportMode.TRAIN],
+        duration: 0,
+        transportModes: [TransportMode.TRAIN],
+        requestedTransportMode: TransportMode.TRAIN,
+      });
+    });
+  });
+
+  describe("given route for rail (train)", () => {
+    test("with 1 step, then calculate footprint", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(
+          TransportMode.TRAIN,
+          routeForRailWith1Step
         )
       ).toEqual({
         distance: 7500,
