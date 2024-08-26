@@ -1,4 +1,4 @@
-import { emissionFactorByTransport } from "../model/emission-factor";
+import { emissionFactorByTransport } from "../model/emission-factor-by-transport-mode";
 import { Footprint } from "../model/footprint";
 import { TransportMode } from "../model/transport-mode";
 

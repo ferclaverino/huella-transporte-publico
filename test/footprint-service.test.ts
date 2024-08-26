@@ -5,7 +5,7 @@ import {
   routeForBusWith1Step,
   routeForBusWithWalkingStep,
 } from "./route-for-bus";
-import { emissionFactorByTransport } from "../src/model/emission-factor";
+import { emissionFactorByTransport } from "../src/model/emission-factor-by-transport-mode";
 import {
   emptyFootprint,
   FootprintService,
