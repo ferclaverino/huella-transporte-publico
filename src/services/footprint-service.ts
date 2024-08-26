@@ -22,16 +22,18 @@ export const emptyFootprint: Footprint = {
   emissions: 0,
   duration: 0,
   transportModes: [],
+  requestedTransportMode: TransportMode.WALK,
 };
 
 export class FootprintService {
   getFootprint(
+    requestedTransportMode: TransportMode,
     directionsResult: google.maps.DirectionsResult | null
   ): Footprint {
     if (!directionsResult) return emptyFootprint;
 
     return directionsResult.routes[0].legs[0].steps
-      .map((step): Footprint => this.toFootprint(step))
+      .map((step): Footprint => this.toFootprint(requestedTransportMode, step))
       .reduce(
         (sumOfFootprint: Footprint, footprint: Footprint) =>
           this.sumFootprint(sumOfFootprint, footprint),
@@ -62,7 +64,10 @@ export class FootprintService {
     return TransportMode.BUS;
   }
 
-  private toFootprint(step: google.maps.DirectionsStep): Footprint {
+  private toFootprint(
+    requestedTransportMode: TransportMode,
+    step: google.maps.DirectionsStep
+  ): Footprint {
     const distance = step.distance ? step.distance.value : 0;
     const transportMode = this.getTransportMode(step);
     const emissionFactor = emissionFactorByTransport[transportMode];
@@ -73,6 +78,7 @@ export class FootprintService {
       emissions,
       duration,
       transportModes: [transportMode],
+      requestedTransportMode,
     };
   }
 
@@ -88,6 +94,7 @@ export class FootprintService {
         (t) => !sumOfFootprint.transportModes.includes(t)
       )
     );
+    sumOfFootprint.requestedTransportMode = footprint.requestedTransportMode;
     return sumOfFootprint;
   }
 }

@@ -2,6 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 
 import { emptyFootprint } from "../src/services/footprint-service";
 import { FootprintViewModel } from "../src/model/footprint-view-model";
+import { TransportMode } from "../src/model/transport-mode";
 
 describe("FootprintViewModel", () => {
   test("given empty footprint, then get view model", () => {
@@ -19,6 +20,7 @@ describe("FootprintViewModel", () => {
       duration: 60,
       emissions: 3,
       transportModes: [],
+      requestedTransportMode: TransportMode.CAR,
     });
     expect(footprintViewModel).toEqual({
       distanceInKm: "1,0",
@@ -33,6 +35,7 @@ describe("FootprintViewModel", () => {
       duration: 90,
       emissions: 3.45,
       transportModes: [],
+      requestedTransportMode: TransportMode.CAR,
     });
     expect(footprintViewModel).toEqual({
       distanceInKm: "1,5",

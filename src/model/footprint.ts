@@ -5,4 +5,5 @@ export interface Footprint {
   emissions: number; // in gr Co2
   duration: number; // in seconds
   transportModes: TransportMode[];
+  requestedTransportMode: TransportMode;
 }
