@@ -31,6 +31,11 @@ export class FootPrintComponent {
     // row.style.borderColor = footprintViewModel.isVisible ? "" : "red";
   }
 
+  unSelect() {
+    this.selectedTransportMode = null;
+    this.displaySelected();
+  }
+
   onSelect(select: (transportMode: TransportMode | null) => void) {
     document.querySelectorAll("table tbody tr").forEach((element) => {
       element.addEventListener("click", () => {
