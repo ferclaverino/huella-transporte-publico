@@ -10,7 +10,6 @@ const enum GoogleTravelMode {
   WALKING = "WALKING",
 }
 
-// TODO support other trains types: https://developers.google.com/maps/documentation/javascript/reference/directions#VehicleType
 const enum GoogleVehicleType {
   BUS = "BUS",
   SUBWAY = "SUBWAY",
