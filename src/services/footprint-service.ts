@@ -21,6 +21,7 @@ export const emptyFootprint: Footprint = {
   distance: 0,
   emissions: 0,
   duration: 0,
+  transportModes: [],
 };
 
 export class FootprintService {
@@ -63,14 +64,15 @@ export class FootprintService {
 
   private toFootprint(step: google.maps.DirectionsStep): Footprint {
     const distance = step.distance ? step.distance.value : 0;
-    const transportType = this.getTransportMode(step);
-    const emissionFactor = emissionFactorByTransport[transportType];
+    const transportMode = this.getTransportMode(step);
+    const emissionFactor = emissionFactorByTransport[transportMode];
     const emissions = distance * emissionFactor;
     const duration = step.duration ? step.duration.value : 0;
     return {
       distance,
       emissions,
       duration,
+      transportModes: [transportMode],
     };
   }
 
@@ -81,6 +83,11 @@ export class FootprintService {
     sumOfFootprint.distance += footprint.distance;
     sumOfFootprint.emissions += footprint.emissions;
     sumOfFootprint.duration += footprint.duration;
+    sumOfFootprint.transportModes = sumOfFootprint.transportModes.concat(
+      footprint.transportModes.filter(
+        (t) => !sumOfFootprint.transportModes.includes(t)
+      )
+    );
     return sumOfFootprint;
   }
 }

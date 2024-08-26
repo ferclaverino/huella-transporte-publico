@@ -50,6 +50,20 @@ describe("FootprintService", () => {
         footprintService.getFootprint(routeForCarWith1Step).duration
       ).toEqual(60);
     });
+
+    test("with 1 step, then calculate transport modes", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForCarWith1Step).transportModes
+      ).toEqual([TransportMode.CAR]);
+    });
+
+    test("with 2 steps, then calculate transport modes", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(routeForCarWith2Steps).transportModes
+      ).toEqual([TransportMode.CAR]);
+    });
   });
 
   describe("given route for bus", () => {
@@ -59,6 +73,7 @@ describe("FootprintService", () => {
         distance: 1500,
         emissions: 1500 * emissionFactorByTransport[TransportMode.BUS],
         duration: 0,
+        transportModes: [TransportMode.BUS],
       });
     });
 
@@ -71,6 +86,7 @@ describe("FootprintService", () => {
             1500 * emissionFactorByTransport[TransportMode.BUS] +
             100 * emissionFactorByTransport[TransportMode.WALK],
           duration: 0,
+          transportModes: [TransportMode.BUS, TransportMode.WALK],
         }
       );
     });
@@ -83,6 +99,7 @@ describe("FootprintService", () => {
         distance: 1500,
         emissions: 1500 * emissionFactorByTransport[TransportMode.BIKE],
         duration: 0,
+        transportModes: [TransportMode.BIKE],
       });
     });
   });
@@ -94,6 +111,7 @@ describe("FootprintService", () => {
         distance: 500,
         emissions: 500 * emissionFactorByTransport[TransportMode.WALK],
         duration: 0,
+        transportModes: [TransportMode.WALK],
       });
     });
   });
@@ -105,6 +123,7 @@ describe("FootprintService", () => {
         distance: 4500,
         emissions: 4500 * emissionFactorByTransport[TransportMode.SUBWAY],
         duration: 0,
+        transportModes: [TransportMode.SUBWAY],
       });
     });
   });
@@ -116,6 +135,7 @@ describe("FootprintService", () => {
         distance: 7500,
         emissions: 7500 * emissionFactorByTransport[TransportMode.TRAIN],
         duration: 0,
+        transportModes: [TransportMode.TRAIN],
       });
     });
   });
