@@ -26,9 +26,22 @@ export class FootprintViewModel {
     this.isVisible = footprint.transportModes.includes(
       footprint.requestedTransportMode
     );
-    this.transportModes = footprint.transportModes.filter((t) =>
-      this.filterWalkWhenCombined(t, footprint)
-    );
+    this.transportModes = this.moveRequestedToFirst(
+      footprint.requestedTransportMode,
+      footprint.transportModes
+    ).filter((t) => this.filterWalkWhenCombined(t, footprint));
+  }
+
+  private moveRequestedToFirst(
+    requestedTransportMode: TransportMode,
+    transportModes: TransportMode[]
+  ): TransportMode[] {
+    if (!transportModes.includes(requestedTransportMode)) return transportModes;
+
+    return [
+      requestedTransportMode,
+      ...transportModes.filter((t) => t !== requestedTransportMode),
+    ];
   }
 
   private filterWalkWhenCombined(

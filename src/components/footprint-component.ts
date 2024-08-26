@@ -14,7 +14,7 @@ export class FootPrintComponent {
       `${transportMode}-transport-modes`
     )!;
     transportModesElement.innerHTML = footprintViewModel.transportModes
-      .map((t) => this.getBadgeForTransportMode(t))
+      .map((t) => this.getBadgeForTransportMode(transportMode, t))
       .join(" ");
 
     const distanceElement = document.getElementById(
@@ -36,12 +36,13 @@ export class FootPrintComponent {
       `[data-transport-mode="${transportMode}"]`
     ) as HTMLElement;
     rowElement.style.display = footprintViewModel.isVisible ? "" : "none";
-    // for debug
-    // row.style.borderColor = footprintViewModel.isVisible ? "" : "red";
   }
 
-  private getBadgeForTransportMode(transportMode: TransportMode): string {
-    return `<span class="badge rounded-pill bg-${transportMode}">${displayNameByTransport[transportMode]}</span>`;
+  private getBadgeForTransportMode(
+    currentTransportMode: TransportMode,
+    combinedTransportMode: TransportMode
+  ): string {
+    return `<span class="badge rounded-pill bg-${currentTransportMode}">${displayNameByTransport[combinedTransportMode]}</span>`;
   }
 
   unSelect() {

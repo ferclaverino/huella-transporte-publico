@@ -63,6 +63,19 @@ describe("FootprintViewModel", () => {
     ]);
   });
 
+  test("given footprint for subway with bus (but bus is first), then get combined transport modes", () => {
+    const footprintViewModel = new FootprintViewModel({
+      ...emptyFootprint,
+      transportModes: [TransportMode.BUS, TransportMode.SUBWAY],
+      requestedTransportMode: TransportMode.SUBWAY,
+    });
+
+    expect(footprintViewModel.transportModes).toEqual([
+      TransportMode.SUBWAY,
+      TransportMode.BUS,
+    ]);
+  });
+
   test("given footprint for subway with bus and walk, then get combined transport modes", () => {
     const footprintViewModel = new FootprintViewModel({
       ...emptyFootprint,
