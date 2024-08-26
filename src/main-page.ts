@@ -42,8 +42,14 @@ export class MainPage {
 
     this.footPrintComponent.show();
 
-    [
+    this.directionsService.getRouteForTransportMode(
+      this.originPlaceId,
+      this.destinationPlaceId,
       TransportMode.CAR,
+      (directionsResult) => this.displayFootPrintForCar(directionsResult)
+    );
+
+    [
       TransportMode.BUS,
       TransportMode.SUBWAY,
       TransportMode.TRAIN,
@@ -54,13 +60,8 @@ export class MainPage {
         this.originPlaceId,
         this.destinationPlaceId,
         transportMode,
-        (directionsResult) => {
-          if (transportMode === TransportMode.CAR) {
-            this.displayFootPrintForCar(directionsResult);
-          } else {
-            this.displayFootPrint(transportMode, directionsResult);
-          }
-        }
+        (directionsResult) =>
+          this.displayFootPrint(transportMode, directionsResult)
       );
     });
   }
