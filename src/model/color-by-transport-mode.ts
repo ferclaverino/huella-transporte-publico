@@ -8,5 +8,4 @@ export const colorByTransport: Record<TransportMode, string> = {
   TRAIN: "#f4ba1b",
   BIKE: "#2c6435",
   WALK: "#a0c539",
-  PUBLIC_TRANSPORT: "#f1882c",
 };
