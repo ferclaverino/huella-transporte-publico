@@ -41,9 +41,12 @@ export class FootprintService {
       );
   }
 
-  private getTransportMode(step: google.maps.DirectionsStep): TransportMode {
+  private getTransportMode(
+    requestedTransportMode: TransportMode,
+    step: google.maps.DirectionsStep
+  ): TransportMode {
     if (step.travel_mode === GoogleTravelMode.DRIVING.toString()) {
-      return TransportMode.CAR;
+      return requestedTransportMode;
     } else if (step.travel_mode === GoogleTravelMode.BICYCLING.toString()) {
       return TransportMode.BIKE;
     } else if (step.travel_mode === GoogleTravelMode.WALKING.toString()) {
@@ -69,7 +72,7 @@ export class FootprintService {
     step: google.maps.DirectionsStep
   ): Footprint {
     const distance = step.distance ? step.distance.value : 0;
-    const transportMode = this.getTransportMode(step);
+    const transportMode = this.getTransportMode(requestedTransportMode, step);
     const emissionFactor = emissionFactorByTransport[transportMode];
     const emissions = distance * emissionFactor;
     const duration = step.duration ? step.duration.value : 0;

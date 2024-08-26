@@ -82,6 +82,18 @@ describe("FootprintService", () => {
     });
   });
 
+  describe("given route for car big", () => {
+    test("with 1 step, then calculate emissions", () => {
+      const footprintService = new FootprintService();
+      expect(
+        footprintService.getFootprint(
+          TransportMode.CAR_BIG,
+          routeForCarWith1Step
+        ).emissions
+      ).toEqual(1000 * emissionFactorByTransport[TransportMode.CAR_BIG]);
+    });
+  });
+
   describe("given route for bus", () => {
     test("with 1 step, then calculate footprint", () => {
       const footprintService = new FootprintService();

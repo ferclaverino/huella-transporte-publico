@@ -1,5 +1,5 @@
 import { Footprint } from "./footprint";
-import { TransportMode } from "./transport-mode";
+import { carTransportModes, TransportMode } from "./transport-mode";
 
 const locale = "es-AR";
 
@@ -23,13 +23,17 @@ export class FootprintViewModel {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-    this.isVisible = footprint.transportModes.includes(
-      footprint.requestedTransportMode
-    );
+    this.isVisible = this.getIsVisible(footprint);
     this.transportModes = this.moveRequestedToFirst(
       footprint.requestedTransportMode,
       footprint.transportModes
     ).filter((t) => this.filterWalkWhenCombined(t, footprint));
+  }
+
+  private getIsVisible(footprint: Footprint): boolean {
+    if (carTransportModes.includes(footprint.requestedTransportMode))
+      return true;
+    return footprint.transportModes.includes(footprint.requestedTransportMode);
   }
 
   private moveRequestedToFirst(

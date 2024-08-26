@@ -3,6 +3,7 @@ import { TransportMode } from "./transport-mode";
 // emission (in CO2 gr) = factor * distance (in km)
 export const colorByTransport: Record<TransportMode, string> = {
   CAR: "#e11e26",
+  CAR_BIG: "#e11e26",
   BUS: "#193662",
   SUBWAY: "#f1882c",
   TRAIN: "#f4ba1b",

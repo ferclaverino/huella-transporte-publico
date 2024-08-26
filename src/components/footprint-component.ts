@@ -1,7 +1,7 @@
 import { displayNameByTransport } from "../model/display-name-by-transport-mode";
 import { Footprint } from "../model/footprint";
 import { FootprintViewModel } from "../model/footprint-view-model";
-import { TransportMode } from "../model/transport-mode";
+import { carTransportModes, TransportMode } from "../model/transport-mode";
 
 export class FootPrintComponent {
   private selectedTransportMode: TransportMode | null = null;
@@ -42,7 +42,10 @@ export class FootPrintComponent {
     currentTransportMode: TransportMode,
     combinedTransportMode: TransportMode
   ): string {
-    return `<span class="badge rounded-pill bg-${currentTransportMode}">${displayNameByTransport[combinedTransportMode]}</span>`;
+    let transportMode = currentTransportMode;
+    if (carTransportModes.includes(currentTransportMode))
+      transportMode = TransportMode.CAR;
+    return `<span class="badge rounded-pill bg-${transportMode}">${displayNameByTransport[combinedTransportMode]}</span>`;
   }
 
   show() {

@@ -102,4 +102,14 @@ describe("FootprintViewModel", () => {
 
     expect(footprintViewModel.transportModes).toEqual([TransportMode.WALK]);
   });
+
+  test("given footprint for car big, then is visible", () => {
+    const footprintViewModel = new FootprintViewModel({
+      ...emptyFootprint,
+      transportModes: [TransportMode.CAR],
+      requestedTransportMode: TransportMode.CAR_BIG,
+    });
+
+    expect(footprintViewModel.isVisible).toEqual(true);
+  });
 });

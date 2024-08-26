@@ -3,7 +3,7 @@ import { FootprintService } from "./services/footprint-service";
 import { MapComponent } from "./components/map-component";
 import { SearchComponent } from "./components/search-component";
 import { FootPrintComponent } from "./components/footprint-component";
-import { TransportMode } from "./model/transport-mode";
+import { carTransportModes, TransportMode } from "./model/transport-mode";
 import { FootprintViewModel } from "./model/footprint-view-model";
 
 export class MainPage {
@@ -55,22 +55,41 @@ export class MainPage {
         this.destinationPlaceId,
         transportMode,
         (directionsResult) => {
-          const footprint = this.footprintService.getFootprint(
-            transportMode,
-            directionsResult
-          );
-          const footprintViewModel = new FootprintViewModel(footprint);
-          this.mapComponent.displayForTransportMode(
-            transportMode,
-            directionsResult,
-            footprintViewModel.isVisible
-          );
-          this.footPrintComponent.displayForTransportMode(
-            transportMode,
-            footprintViewModel
-          );
+          if (transportMode === TransportMode.CAR) {
+            this.displayFootPrintForCar(directionsResult);
+          } else {
+            this.displayFootPrint(transportMode, directionsResult);
+          }
         }
       );
     });
+  }
+
+  private displayFootPrintForCar(
+    directionsResult: google.maps.DirectionsResult | null
+  ) {
+    carTransportModes.forEach((transportMode) =>
+      this.displayFootPrint(transportMode, directionsResult)
+    );
+  }
+
+  private displayFootPrint(
+    transportMode: TransportMode,
+    directionsResult: google.maps.DirectionsResult | null
+  ) {
+    const footprint = this.footprintService.getFootprint(
+      transportMode,
+      directionsResult
+    );
+    const footprintViewModel = new FootprintViewModel(footprint);
+    this.mapComponent.displayForTransportMode(
+      transportMode,
+      directionsResult,
+      footprintViewModel.isVisible
+    );
+    this.footPrintComponent.displayForTransportMode(
+      transportMode,
+      footprintViewModel
+    );
   }
 }
