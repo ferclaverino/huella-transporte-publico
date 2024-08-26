@@ -10,6 +10,14 @@
   color: #ffffff;
 }
 
+#results-card {
+  display: none;
+}
+
+#directions-card {
+  display: none;
+}
+
 .bg-CAR {
   background-color: #e11e26;
 }

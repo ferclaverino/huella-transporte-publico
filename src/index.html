@@ -71,7 +71,7 @@
             </div>
           </div>
 
-          <div class="card mb-3">
+          <div class="card mb-3" id="results-card">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-hover table-sm">
@@ -86,27 +86,21 @@
                   </thead>
                   <tbody>
                     <tr data-transport-mode="CAR">
-                      <th scope="row" id="CAR-transport-modes">
-                        <span class="badge rounded-pill bg-CAR">Auto</span>
-                      </th>
+                      <th scope="row" id="CAR-transport-modes"></th>
                       <td class="text-end"><span id="CAR-distance"></span></td>
                       <td class="text-end"><span id="CAR-duration"></span></td>
                       <td class="text-end"><span id="CAR-emissions"></span></td>
                       <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="BUS">
-                      <th scope="row" id="BUS-transport-modes">
-                        <span class="badge rounded-pill bg-BUS">Colectivo</span>
-                      </th>
+                      <th scope="row" id="BUS-transport-modes"></th>
                       <td class="text-end"><span id="BUS-distance"></span></td>
                       <td class="text-end"><span id="BUS-duration"></span></td>
                       <td class="text-end"><span id="BUS-emissions"></span></td>
                       <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="SUBWAY">
-                      <th scope="row" id="SUBWAY-transport-modes">
-                        <span class="badge rounded-pill bg-SUBWAY">Subte</span>
-                      </th>
+                      <th scope="row" id="SUBWAY-transport-modes"></th>
                       <td class="text-end">
                         <span id="SUBWAY-distance"></span>
                       </td>
@@ -119,9 +113,7 @@
                       <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="TRAIN">
-                      <th scope="row" id="TRAIN-transport-modes">
-                        <span class="badge rounded-pill bg-TRAIN">Tren</span>
-                      </th>
+                      <th scope="row" id="TRAIN-transport-modes"></th>
                       <td class="text-end">
                         <span id="TRAIN-distance"></span>
                       </td>
@@ -134,11 +126,7 @@
                       <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="BIKE">
-                      <th scope="row" id="BIKE-transport-modes">
-                        <span class="badge rounded-pill bg-BIKE"
-                          >Bicicleta</span
-                        >
-                      </th>
+                      <th scope="row" id="BIKE-transport-modes"></th>
                       <td class="text-end"><span id="BIKE-distance"></span></td>
                       <td class="text-end"><span id="BIKE-duration"></span></td>
                       <td class="text-end">
@@ -147,11 +135,7 @@
                       <td class="text-end"></td>
                     </tr>
                     <tr data-transport-mode="WALK">
-                      <th scope="row" id="WALK-transport-modes">
-                        <span class="badge rounded-pill bg-WALK">
-                          Caminando
-                        </span>
-                      </th>
+                      <th scope="row" id="WALK-transport-modes"></th>
                       <td class="text-end"><span id="WALK-distance"></span></td>
                       <td class="text-end"><span id="WALK-duration"></span></td>
                       <td class="text-end">
@@ -165,7 +149,7 @@
             </div>
           </div>
 
-          <div class="card mb-3 mh-100">
+          <div class="card mb-3 mh-100" id="directions-card">
             <div class="card-body" id="directions"></div>
           </div>
         </div>

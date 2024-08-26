@@ -40,8 +40,7 @@ export class MainPage {
     if (!this.originPlaceId) return;
     if (!this.destinationPlaceId) return;
 
-    // If there is some transport mode selected, then unselect
-    this.footPrintComponent.unSelect();
+    this.footPrintComponent.show();
 
     [
       TransportMode.CAR,

@@ -45,7 +45,17 @@ export class FootPrintComponent {
     return `<span class="badge rounded-pill bg-${currentTransportMode}">${displayNameByTransport[combinedTransportMode]}</span>`;
   }
 
-  unSelect() {
+  show() {
+    const resultsCardElement = document.getElementById(
+      "results-card"
+    ) as HTMLElement;
+    resultsCardElement.style.display = "flex";
+
+    // If there is some transport mode selected, then unselect
+    this.unSelect();
+  }
+
+  private unSelect() {
     this.selectedTransportMode = null;
     this.displaySelected();
   }
