@@ -1,3 +1,4 @@
+import { displayNameByTransport } from "../model/display-name-by-transport-mode";
 import { Footprint } from "../model/footprint";
 import { FootprintViewModel } from "../model/footprint-view-model";
 import { TransportMode } from "../model/transport-mode";
@@ -6,29 +7,41 @@ export class FootPrintComponent {
   private selectedTransportMode: TransportMode | null = null;
 
   displayForTransportMode(
-    footprintViewModel: FootprintViewModel,
-    transportMode: TransportMode
+    transportMode: TransportMode,
+    footprintViewModel: FootprintViewModel
   ) {
+    const transportModesElement = document.getElementById(
+      `${transportMode}-transport-modes`
+    )!;
+    transportModesElement.innerHTML = footprintViewModel.transportModes
+      .map((t) => this.getBadgeForTransportMode(t))
+      .join(" ");
+
     const distanceElement = document.getElementById(
       `${transportMode}-distance`
     )!;
+    distanceElement.innerHTML = footprintViewModel.distanceInKm;
+
     const emisionsElement = document.getElementById(
       `${transportMode}-emissions`
     )!;
+    emisionsElement.innerHTML = footprintViewModel.emissionsInGr;
+
     const durationElement = document.getElementById(
       `${transportMode}-duration`
     )!;
-    distanceElement.innerHTML = footprintViewModel.distanceInKm;
-    emisionsElement.innerHTML = footprintViewModel.emissionsInGr;
     durationElement.innerHTML = footprintViewModel.durationInMin;
 
-    const row = document.querySelector(
+    const rowElement = document.querySelector(
       `[data-transport-mode="${transportMode}"]`
     ) as HTMLElement;
-
-    row.style.display = footprintViewModel.isVisible ? "" : "none";
+    rowElement.style.display = footprintViewModel.isVisible ? "" : "none";
     // for debug
     // row.style.borderColor = footprintViewModel.isVisible ? "" : "red";
+  }
+
+  private getBadgeForTransportMode(transportMode: TransportMode): string {
+    return `<span class="badge rounded-pill bg-${transportMode}">${displayNameByTransport[transportMode]}</span>`;
   }
 
   unSelect() {

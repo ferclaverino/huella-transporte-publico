@@ -12,6 +12,7 @@ describe("FootprintViewModel", () => {
       durationInMin: "0",
       emissionsInGr: "0,00",
       isVisible: false,
+      transportModes: emptyFootprint.transportModes,
     });
   });
 
@@ -28,6 +29,7 @@ describe("FootprintViewModel", () => {
       durationInMin: "1",
       emissionsInGr: "3,00",
       isVisible: true,
+      transportModes: [TransportMode.CAR],
     });
   });
 
@@ -44,6 +46,47 @@ describe("FootprintViewModel", () => {
       durationInMin: "2",
       emissionsInGr: "3,45",
       isVisible: true,
+      transportModes: [TransportMode.CAR],
     });
+  });
+
+  test("given footprint for subway with bus, then get combined transport modes", () => {
+    const footprintViewModel = new FootprintViewModel({
+      ...emptyFootprint,
+      transportModes: [TransportMode.SUBWAY, TransportMode.BUS],
+      requestedTransportMode: TransportMode.SUBWAY,
+    });
+
+    expect(footprintViewModel.transportModes).toEqual([
+      TransportMode.SUBWAY,
+      TransportMode.BUS,
+    ]);
+  });
+
+  test("given footprint for subway with bus and walk, then get combined transport modes", () => {
+    const footprintViewModel = new FootprintViewModel({
+      ...emptyFootprint,
+      transportModes: [
+        TransportMode.WALK,
+        TransportMode.SUBWAY,
+        TransportMode.BUS,
+      ],
+      requestedTransportMode: TransportMode.SUBWAY,
+    });
+
+    expect(footprintViewModel.transportModes).toEqual([
+      TransportMode.SUBWAY,
+      TransportMode.BUS,
+    ]);
+  });
+
+  test("given footprint for walk, then get transport modes", () => {
+    const footprintViewModel = new FootprintViewModel({
+      ...emptyFootprint,
+      transportModes: [TransportMode.WALK],
+      requestedTransportMode: TransportMode.WALK,
+    });
+
+    expect(footprintViewModel.transportModes).toEqual([TransportMode.WALK]);
   });
 });

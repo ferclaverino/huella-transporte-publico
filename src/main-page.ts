@@ -62,13 +62,13 @@ export class MainPage {
           );
           const footprintViewModel = new FootprintViewModel(footprint);
           this.mapComponent.displayForTransportMode(
-            directionsResult,
             transportMode,
+            directionsResult,
             footprintViewModel.isVisible
           );
           this.footPrintComponent.displayForTransportMode(
-            footprintViewModel,
-            transportMode
+            transportMode,
+            footprintViewModel
           );
         }
       );

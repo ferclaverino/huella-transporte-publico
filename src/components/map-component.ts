@@ -37,8 +37,9 @@ export class MapComponent {
   }
 
   displayForTransportMode(
-    route: google.maps.DirectionsResult | null,
     transportMode: TransportMode,
+    route: google.maps.DirectionsResult | null,
+
     isVisible: boolean
   ) {
     this.renderers[transportMode].setDirections(route);

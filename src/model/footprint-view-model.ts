@@ -1,4 +1,5 @@
 import { Footprint } from "./footprint";
+import { TransportMode } from "./transport-mode";
 
 const locale = "es-AR";
 
@@ -7,6 +8,7 @@ export class FootprintViewModel {
   readonly durationInMin: string;
   readonly emissionsInGr: string;
   readonly isVisible: boolean;
+  transportModes: TransportMode[];
 
   constructor(footprint: Footprint) {
     this.distanceInKm = (footprint.distance / 1000).toLocaleString(locale, {
@@ -24,5 +26,17 @@ export class FootprintViewModel {
     this.isVisible = footprint.transportModes.includes(
       footprint.requestedTransportMode
     );
+    this.transportModes = footprint.transportModes.filter((t) =>
+      this.filterWalkWhenCombined(t, footprint)
+    );
+  }
+
+  private filterWalkWhenCombined(
+    transportMode: TransportMode,
+    footprint: Footprint
+  ): boolean {
+    if (footprint.requestedTransportMode === TransportMode.WALK) return true;
+    if (transportMode === TransportMode.WALK) return false;
+    return true;
   }
 }
