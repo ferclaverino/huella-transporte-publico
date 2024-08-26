@@ -4,6 +4,7 @@ import { MapComponent } from "./components/map-component";
 import { SearchComponent } from "./components/search-component";
 import { FootPrintComponent } from "./components/footprint-component";
 import { TransportMode } from "./model/transport-mode";
+import { FootprintViewModel } from "./model/footprint-view-model";
 
 export class MainPage {
   private originPlaceId: string;
@@ -53,12 +54,18 @@ export class MainPage {
         this.destinationPlaceId,
         transportMode,
         (directionsResult) => {
+          const footprint = this.footprintService.getFootprint(
+            transportMode,
+            directionsResult
+          );
+          const footprintViewModel = new FootprintViewModel(footprint);
           this.mapComponent.displayForTransportMode(
             directionsResult,
-            transportMode
+            transportMode,
+            footprintViewModel.isVisible
           );
           this.footPrintComponent.displayForTransportMode(
-            this.footprintService.getFootprint(directionsResult),
+            footprintViewModel,
             transportMode
           );
         }

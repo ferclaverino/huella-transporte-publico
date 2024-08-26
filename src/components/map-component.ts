@@ -31,18 +31,20 @@ export class MapComponent {
     google.maps.DirectionsRenderer
   > {
     return Object.keys(TransportMode).reduce((renderers, transportMode) => {
-      renderers[transportMode] = new google.maps.DirectionsRenderer(
-        this.getRendererOptions(TransportMode[transportMode])
-      );
+      renderers[transportMode] = new google.maps.DirectionsRenderer();
       return renderers;
     }, {} as any as Record<TransportMode, google.maps.DirectionsRenderer>);
   }
 
   displayForTransportMode(
     route: google.maps.DirectionsResult | null,
-    transportMode: TransportMode
+    transportMode: TransportMode,
+    isVisible: boolean
   ) {
     this.renderers[transportMode].setDirections(route);
+    this.renderers[transportMode].setOptions(
+      this.getRendererOptionsForUnselected(transportMode, isVisible)
+    );
   }
 
   selectTransportMode(transportMode: TransportMode | null) {
@@ -64,7 +66,9 @@ export class MapComponent {
 
   private displayTransportModeAsUnSelected(transportMode: TransportMode) {
     const renderer = this.renderers[transportMode];
-    renderer.setOptions(this.getRendererOptions(TransportMode[transportMode]));
+    renderer.setOptions(
+      this.getRendererOptionsForUnselected(TransportMode[transportMode])
+    );
     renderer.setPanel(null);
     this.redrawDirections(renderer);
   }
@@ -74,24 +78,30 @@ export class MapComponent {
       renderer.setDirections(renderer.getDirections());
   }
 
-  private getRendererOptions(transportMode: TransportMode) {
-    return {
-      suppressBicyclingLayer: true,
-      polylineOptions: {
-        strokeColor: colorByTransport[transportMode],
-        strokeWeight: 5,
-        strokeOpacity: 0.5,
-      },
-    };
+  private getRendererOptionsForUnselected(
+    transportMode: TransportMode,
+    isVisible = true
+  ) {
+    return this.getRendererOption(transportMode, 5, 0.8, isVisible);
   }
 
   private getRendererOptionsForSelected(transportMode: TransportMode) {
+    return this.getRendererOption(transportMode, 10, 1, true);
+  }
+
+  private getRendererOption(
+    transportMode: TransportMode,
+    strokeWeight: number,
+    strokeOpacity: number,
+    isVisible: boolean
+  ) {
     return {
       suppressBicyclingLayer: true,
       polylineOptions: {
         strokeColor: colorByTransport[transportMode],
-        strokeWeight: 10,
-        strokeOpacity: 1,
+        strokeWeight,
+        strokeOpacity,
+        visible: isVisible,
       },
     };
   }

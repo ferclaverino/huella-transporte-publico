@@ -6,6 +6,7 @@ export class FootprintViewModel {
   readonly distanceInKm: string;
   readonly durationInMin: string;
   readonly emissionsInGr: string;
+  readonly isVisible: boolean;
 
   constructor(footprint: Footprint) {
     this.distanceInKm = (footprint.distance / 1000).toLocaleString(locale, {
@@ -20,5 +21,8 @@ export class FootprintViewModel {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
+    this.isVisible = footprint.transportModes.includes(
+      footprint.requestedTransportMode
+    );
   }
 }

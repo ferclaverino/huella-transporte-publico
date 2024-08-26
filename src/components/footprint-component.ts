@@ -5,8 +5,10 @@ import { TransportMode } from "../model/transport-mode";
 export class FootPrintComponent {
   private selectedTransportMode: TransportMode | null = null;
 
-  displayForTransportMode(footprint: Footprint, transportMode: TransportMode) {
-    const footprintViewModel = new FootprintViewModel(footprint);
+  displayForTransportMode(
+    footprintViewModel: FootprintViewModel,
+    transportMode: TransportMode
+  ) {
     const distanceElement = document.getElementById(
       `${transportMode}-distance`
     )!;
@@ -19,6 +21,14 @@ export class FootPrintComponent {
     distanceElement.innerHTML = footprintViewModel.distanceInKm;
     emisionsElement.innerHTML = footprintViewModel.emissionsInGr;
     durationElement.innerHTML = footprintViewModel.durationInMin;
+
+    const row = document.querySelector(
+      `[data-transport-mode="${transportMode}"]`
+    ) as HTMLElement;
+
+    row.style.display = footprintViewModel.isVisible ? "" : "none";
+    // for debug
+    // row.style.borderColor = footprintViewModel.isVisible ? "" : "red";
   }
 
   onSelect(select: (transportMode: TransportMode | null) => void) {
