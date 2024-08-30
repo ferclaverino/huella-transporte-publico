@@ -42,6 +42,7 @@ export class MainPage {
 
     this.footPrintComponent.show();
 
+    this.calculateAndDisplayFootprintForCar();
     this.calculateAndDisplayFootprintForPublic();
   }
 
@@ -75,7 +76,7 @@ export class MainPage {
   private displayFootPrintForCar(
     directionsResult: google.maps.DirectionsResult | null
   ) {
-    carTransportModes.forEach((transportMode) =>
+    [TransportMode.CAR].forEach((transportMode) =>
       this.displayFootPrint(transportMode, directionsResult)
     );
   }

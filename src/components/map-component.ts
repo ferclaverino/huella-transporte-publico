@@ -83,7 +83,7 @@ export class MapComponent {
     transportMode: TransportMode,
     isVisible = true
   ) {
-    return this.getRendererOption(transportMode, 5, 0.8, isVisible);
+    return this.getRendererOption(transportMode, 5, 0.6, isVisible);
   }
 
   private getRendererOptionsForSelected(transportMode: TransportMode) {
