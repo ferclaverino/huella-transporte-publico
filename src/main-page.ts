@@ -42,13 +42,10 @@ export class MainPage {
 
     this.footPrintComponent.show();
 
-    this.directionsService.getRouteForTransportMode(
-      this.originPlaceId,
-      this.destinationPlaceId,
-      TransportMode.CAR,
-      (directionsResult) => this.displayFootPrintForCar(directionsResult)
-    );
+    this.calculateAndDisplayFootprintForPublic();
+  }
 
+  private calculateAndDisplayFootprintForPublic() {
     [
       TransportMode.BUS,
       TransportMode.SUBWAY,
@@ -64,6 +61,15 @@ export class MainPage {
           this.displayFootPrint(transportMode, directionsResult)
       );
     });
+  }
+
+  private calculateAndDisplayFootprintForCar() {
+    this.directionsService.getRouteForTransportMode(
+      this.originPlaceId,
+      this.destinationPlaceId,
+      TransportMode.CAR,
+      (directionsResult) => this.displayFootPrintForCar(directionsResult)
+    );
   }
 
   private displayFootPrintForCar(
