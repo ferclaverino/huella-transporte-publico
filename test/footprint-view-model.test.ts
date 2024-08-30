@@ -10,7 +10,7 @@ describe("FootprintViewModel", () => {
     expect(footprintViewModel).toEqual({
       distanceInKm: "0,0",
       durationInMin: "0",
-      emissionsInGr: "0,00",
+      emissionsInGr: "0",
       isVisible: false,
       transportModes: emptyFootprint.transportModes,
     });
@@ -27,7 +27,7 @@ describe("FootprintViewModel", () => {
     expect(footprintViewModel).toEqual({
       distanceInKm: "1,0",
       durationInMin: "1",
-      emissionsInGr: "3,00",
+      emissionsInGr: "3",
       isVisible: true,
       transportModes: [TransportMode.CAR],
     });
@@ -44,7 +44,7 @@ describe("FootprintViewModel", () => {
     expect(footprintViewModel).toEqual({
       distanceInKm: "1,5",
       durationInMin: "2",
-      emissionsInGr: "3,45",
+      emissionsInGr: "3",
       isVisible: true,
       transportModes: [TransportMode.CAR],
     });

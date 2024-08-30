@@ -20,8 +20,8 @@ export class FootprintViewModel {
       maximumFractionDigits: 0,
     });
     this.emissionsInGr = footprint.emissions.toLocaleString(locale, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     });
     this.isVisible = this.getIsVisible(footprint);
     this.transportModes = this.moveRequestedToFirst(
