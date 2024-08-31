@@ -16,6 +16,10 @@ export const routeForCarWith1Step = {
               travel_mode: "DRIVING",
             },
           ],
+          duration: {
+            text: "1 min",
+            value: 61,
+          },
         },
       ],
     },

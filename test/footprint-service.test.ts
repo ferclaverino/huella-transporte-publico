@@ -57,7 +57,7 @@ describe("FootprintService", () => {
       expect(
         footprintService.getFootprint(TransportMode.CAR, routeForCarWith1Step)
           .duration
-      ).toEqual(60);
+      ).toEqual(61);
     });
 
     test("with 1 step, then calculate transport modes", () => {

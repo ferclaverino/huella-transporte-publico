@@ -32,12 +32,17 @@ export class FootprintService {
   ): Footprint {
     if (!directionsResult) return emptyFootprint;
 
-    return directionsResult.routes[0].legs[0].steps
+    const leg = directionsResult.routes[0].legs[0];
+    const footprintWithDuration = {
+      ...emptyFootprint,
+      duration: leg.duration ? leg.duration.value : 0,
+    };
+    return leg.steps
       .map((step): Footprint => this.toFootprint(requestedTransportMode, step))
       .reduce(
         (sumOfFootprint: Footprint, footprint: Footprint) =>
           this.sumFootprint(sumOfFootprint, footprint),
-        { ...emptyFootprint }
+        footprintWithDuration
       );
   }
 
@@ -91,7 +96,9 @@ export class FootprintService {
   ): Footprint {
     sumOfFootprint.distance += footprint.distance;
     sumOfFootprint.emissions += footprint.emissions;
-    sumOfFootprint.duration += footprint.duration;
+    // We keep duration as gmaps informs
+    // so we consider waiting time
+    sumOfFootprint.duration = sumOfFootprint.duration;
     sumOfFootprint.transportModes = sumOfFootprint.transportModes.concat(
       footprint.transportModes.filter(
         (t) => !sumOfFootprint.transportModes.includes(t)
